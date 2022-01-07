@@ -38,7 +38,7 @@
 		</header>
         
 		<video controls>
-			<source src="https://upload.wikimedia.org/wikipedia/commons/2/25/Sintel_extract_new.ogv" type="video/ogg"/>
+			<source id="main_video" src="https://upload.wikimedia.org/wikipedia/commons/2/25/Sintel_extract_new.ogv" type="video/ogg"/>
 		</video>
 		<p>In this stream I am showing you how to play this game!</p>	
 
@@ -57,17 +57,39 @@
 	<nav id="categories" class="side_navigation">
 
 		<!-- FORM -->
-		<div>
-			<form id="CHANGE">
-			  <label for="furl">URL</label>
-			  <input type="text" id="furl" name="url" placeholder="the video's url">
-		  
-			  <label for="fminute">Offset</label>
-			  <input type="text" id="fminute" name="minute" placeholder="offset in the video">
+		<div class=form_div>
+			<form id="nav_form">
+
+				<div>
+					<label for="furl">URL</label>
+					
+					<input type="text" id="furl" name="url" placeholder="the video's url">
+					<input type="button" value="Play" id="url_button">
+				</div>
 				
-			  //add the buttons
+				<div>
+					<label for="fminute">Offset</label>
+					<input type="text" id="fminute" name="minute" placeholder="offset in the video">
+					<input type="button" value="Go to offset">
+				</div>
+
+				<div>
+					<input type="button" value="Rotate" id="rotate">
+					<input type="button" value="Preview">
+					<input type="button" value="Remove Controls">
+				</div>
+
+				<div>
+					
+					<input type="radio" id="control" name="radio" value="control"
+							checked>
+					<label for="huey">Control</label>
+					
+					
+					<input type="radio" id="no_control" name="radio" value="no_control">
+					<label for="dewey">No Control</label>
+				</div>
 			
-			  <input type="submit" value="Submit">
 			</form>
 		  </div>
 	</nav>
