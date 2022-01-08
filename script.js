@@ -256,9 +256,33 @@ comment_button.addEventListener("click", () => {
     new_comment.appendChild(new_text)
     new_comment.appendChild(new_span)
     
-    document.querySelector('#comments').append(new_comment)    
-
+    document.querySelector('#comments').append(new_comment)
+    
+    console.log(new_comment.outerHTML)
+    
+    let previous = window.localStorage.getItem('comments')
+    window.localStorage.setItem('comments', previous+new_comment.outerHTML)
 })
+
+window.addEventListener('load', (event) => {
+    keys = Object.keys(localStorage)
+    i = keys.length
+    console.log(i)
+
+    while ( i-- ) {
+        let value=localStorage.getItem(keys[i])
+        let dir = document.createElement('div')
+        dir.innerHTML = value
+        document.querySelector('#comments').append(dir)
+    }
+
+  });
+
+function remove_local_storage(){
+window.localStorage.clear();
+}
+
+//remove_local_storage()
 
 
 // Point 7.b geo-localization API
@@ -311,4 +335,4 @@ function processLatLng(lat, lng) {
     );
 }
 
-get_city_region()
+//get_city_region()
