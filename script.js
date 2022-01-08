@@ -181,18 +181,33 @@ sponsored_video.addEventListener("mouseleave", () => {sponsored_video.pause()})
 
 
 // Point 6 Log-in 
-var user_logged=-1
+var user_logged=false
+var i=1;
 var comment_button= document.querySelector("#comment_button")
+
+function remove_form(){
+
+}
 
 function log_in(){
 
+    user_logged=0
+    remove_form()
 }
 
 
 comment_button.addEventListener("click", () => {
-    if (user_logged==-1)
+    if (!user_logged)
         return
     
+    let new_comment = document.createElement('p')
+
+    if (document.querySelector('#comment').value != ""){
+        let text = "Comment "+i+": "+document.querySelector('#comment').value
+        i = i + 1
+        new_comment.append(text)
+    }
     
+    document.querySelector('#comments h5').append(new_comment)    
 
 })
