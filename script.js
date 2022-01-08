@@ -1,5 +1,8 @@
 console.log('Hello Project.');
 
+// Hide the footer
+document.querySelector('.form-log-in').style.display = 'none'; // hide
+
 // Useful variables
 var source = document.querySelector('#source')
 console.log(source)
@@ -181,33 +184,78 @@ sponsored_video.addEventListener("mouseleave", () => {sponsored_video.pause()})
 
 
 // Point 6 Log-in 
-var user_logged=false
 var i=1;
 var comment_button= document.querySelector("#comment_button")
 
 function remove_form(){
+    document.querySelector('.form-log-in').style.display = 'none'; 
+}
 
+function show_form(){
+    document.querySelector('.form-log-in').style.display = 'block'; 
 }
 
 function log_in(){
 
-    user_logged=0
-    remove_form()
+    alert('Please compile the form below')
+
+    show_form()
+    
+    let submit = document.querySelector('#submit-log-in')
+    console.log(submit)
+    
+    submit.addEventListener("click",() => {
+        
+        let name = document.querySelector('#name-log-in').value
+        let last_name = document.querySelector('#last-name-log-in').value
+        let email = document.querySelector('#email-log-in').value
+        let num_1 = document.querySelector('#num-1').value
+        let num_2 = document.querySelector('#num-2').value
+        let num_3 = document.querySelector('#num-3').value
+
+        if(last_name == "" || name == "")
+            {alert('null String'); return}
+        
+        if(isNaN(num_1) || isNaN(num_2) || isNaN(num_3))
+            {alert('Number not valid');return}
+
+        let storage = window.sessionStorage;
+        storage.setItem(name, last_name + " " + email+ " "+num_1+num_2+num_3);
+
+        remove_form()
+        alert('Now you can insert messages!')
+    })
 }
 
 
-comment_button.addEventListener("click", () => {
-    if (!user_logged)
-        return
-    
-    let new_comment = document.createElement('p')
+comment_button.addEventListener("click", () => {    
 
-    if (document.querySelector('#comment').value != ""){
-        let text = "Comment "+i+": "+document.querySelector('#comment').value
-        i = i + 1
-        new_comment.append(text)
-    }
+    let storage = window.sessionStorage;
+
+    let name = document.querySelector('#name-comment').value
+    if (storage.getItem(name) == null) 
+        {log_in();return}
+
+    let comment = document.querySelector('#comment').value
+
+    let today = new Date();
+    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     
-    document.querySelector('#comments h5').append(new_comment)    
+    let new_comment = document.createElement('div')
+    new_comment.setAttribute('class', 'comment-author')
+
+    let new_text = document.createElement('p')
+    new_text.textContent = comment
+
+    let new_span = document.createElement('span')
+    new_span.textContent = 'posted by '+ name + " | " + date 
+    
+  
+    console.log(new_text)
+
+    new_comment.appendChild(new_text)
+    new_comment.appendChild(new_span)
+    
+    document.querySelector('#comments').append(new_comment)    
 
 })

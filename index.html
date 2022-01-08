@@ -45,15 +45,22 @@
 			<h5>Comments</h5>
 			
 			<input type="text" placeholder="insert you comment" id=comment />
+			<input type="text" placeholder="insert you Name" id=name-comment />
 			<input type="button" value="insert" id="comment_button" />
 
 		</div>
 		
-        <footer class="video_author">
+        <div class="comment-author">
+			<p>NEW COMMENT</p>
+			<span>posted by Simone Papicchio</span>
+			<span> | Date</span>
+			<span> | Location</span>
+		</div>	
+		<div class="comment-author">
 			<address>posted by <a href="#">Simone Papicchio</a></address>
 			<span> | <a href="#" >View comments</a></span>
 			<span> | <a href="#" >Share</a></span>
-		</footer>	
+		</div>	
 	</article>
 	
 </section>
@@ -112,34 +119,31 @@
 
 <!--FOOTER-->
 <footer id="footer">
-	<form class="form-style-7">
-		<ul>
-		<li>
-			<label for="name">Name</label>
-			<input type="text" name="name" maxlength="100">
-			<span>Enter your full name here</span>
-		</li>
-		<li>
-			<label for="email">Email</label>
-			<input type="email" name="email" maxlength="100">
-			<span>Enter a valid email address</span>
-		</li>
-		<li>
-			<label for="url">Website</label>
-			<input type="url" name="url" maxlength="100">
-			<span>Your website address (eg: http://www.google.com)</span>
-		</li>
-		<li>
-			<label for="bio">About You</label>
-			<textarea name="bio" onkeyup="adjust_textarea(this)"></textarea>
-			<span>Say something about yourself</span>
-		</li>
-		<li>
-			<input type="submit" value="Send This" >
-		</li>
-		</ul>
+	
+	<div class="form-log-in">
+		<div class="form-log-in-heading">Log in to the webpage</div>
+			
+			<label for="field1"><span>First Name</span>
+			<input type="text" id='name-log-in' class="input-field" name="field1" value="" placeholder="Simone" required/></label>
+			
+			<label for="field2"><span>Last Name</span>
+			<input type="text" id='last-name-log-in' class="input-field" name="field2" value="" placeholder="Papicchio" required/></label>
+			
+			<label for="field3"><span>Email</span>
+			<input type="text" id=email-log-in class="input-field" name="field3" value="" placeholder="username@domain.it" required/></label>
+			
+			<label><span>Telephone</span>
+			<input type="text" id=num-1 class="tel-number-field" name="tel_no_1" value="" maxlength="3" placeholder="341" />
+			-
+			<input type="text" id=num-2 class="tel-number-field" name="tel_no_2" value="" maxlength="3" placeholder="459" />
+			-
+			<input type="text" id=num-3 class="tel-number-field" name="tel_no_3" value="" maxlength="4" placeholder="3974" /></label>
+
+			<label><span> </span><input type="submit" value="Submit" id="submit-log-in" /></label>
 		</form>
+		</div>
 </footer>	
+
 <script src="script.js"></script>
 </body>
 
