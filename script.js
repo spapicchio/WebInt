@@ -197,7 +197,7 @@ function show_form(){
 
 function log_in(){
 
-    alert('Please compile the form below')
+    alert('Please compile the form below for the log in')
 
     show_form()
     
@@ -259,3 +259,56 @@ comment_button.addEventListener("click", () => {
     document.querySelector('#comments').append(new_comment)    
 
 })
+
+
+// Point 7.b geo-localization API
+var geocoder;
+
+function error(){
+    alert("Geocoder failed");
+  }
+
+  function success(position) {
+    var lat = position.coords.latitude;
+    var lng = position.coords.longitude;
+    processLatLng(lat, lng)
+}
+
+function get_city_region(){
+    if (navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(success, error);
+
+}
+ 
+
+function processLatLng(lat, lng) {
+    var geocoder;
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(lat, lng);
+
+    geocoder.geocode(
+        {'latLng': latlng}, 
+        function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    var add= results[0].formatted_address ;
+                    var  value=add.split(",");
+
+                    count=value.length;
+                    country=value[count-1];
+                    state=value[count-2];
+                    city=value[count-3];
+                    console.log("city name is: " + city)
+                }
+                else  {
+                   console.log("address not found")
+                }
+            }
+            else {
+                console.log("Geocoder failed due to: " + status)
+            }
+        }
+    );
+}
+
+get_city_region()
