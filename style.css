@@ -140,41 +140,6 @@ video {
 }
 
 
-input {
-	margin-right: 10px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-
-input#videoUrl {
-	width: 70%;
-}
-
-
-div#previewContainer video {
-	max-width: 30%;
-	display:inline;
-	margin-right: 5px;
-}
-
-/*Used for the point 4.d*/
-.rotate {
-	transform:rotate(90deg);
-    -moz-transform:rotate(90deg);
-    -webkit-transform:rotate(90deg);
-}
-
-.norot {
-	transform:rotate(0deg);
-    -moz-transform:rotate(0deg);
-    -webkit-transform:rotate(0deg);
-}
-
-.mirror {
-	transform:scale(-1,1);
-    -moz-transform:scale(-1,1);
-    -webkit-transform:scale(-1,1);
-}
 
 
 footer.video_author {
@@ -276,7 +241,41 @@ div.cleaner {
 }
 
 
+/*%%%%%%%%%%%% Useful css %%%%%%%%%%%%%*/
+input {
+	margin-right: 10px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
 
+input#videoUrl {
+	width: 70%;
+}
 
+/*Used for the point 4.c*/
+.preview video{
+	max-width: 45%;
+	display:inline;
+	margin-right: 5px;
+}
 
+/*Used for the point 4.d*/
+.rotate {
+	transform:rotate(90deg);
+}
+
+/*Used for the point 5.b*/
+.mirror {
+	transform:scale(-1,1);
+}
+
+  .b {
+	border: 0.5vmin solid black;
+	margin: 0 0 0 0;
+	padding: 0;
+  }
+  
+  .r {
+	border-radius: 100%;
+  }
 
