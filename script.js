@@ -227,45 +227,83 @@ function log_in(){
     })
 }
 
-
-comment_button.addEventListener("click", () => {    
-
-    let storage = window.sessionStorage;
-
-    let name = document.querySelector('#name-comment').value
-    if (storage.getItem(name) == null) 
-        {log_in();return}
-
-    let comment = document.querySelector('#comment').value
-
-    let today = new Date();
-    let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+function create_comment(city_country){
+        // If you are not logged in, you have to compile the form 
+        let storage = window.sessionStorage;
+        let name = document.querySelector('#name-comment').value
+        if (storage.getItem(name) == null) 
+            {log_in();return}
     
-    let new_comment = document.createElement('div')
-    new_comment.setAttribute('class', 'comment-author')
+        // Select where to add the comment
+        let comment = document.querySelector('#comment').value
+    
+        //select the date
+        let today = new Date();
+        let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        
+        //create the new Comment
+        let new_comment = document.createElement('div')
+        new_comment.setAttribute('class', 'comment-author')
+    
+        //create the actual text comment
+        let new_text = document.createElement('p')
+        new_text.textContent = comment
+    
+        // add the name, the date amd the city, country
+        let new_span = document.createElement('span')
+        new_span.textContent = 'posted by '+ name + " | " + date + " | " + city_country
+        
+        //check for debugging
+        console.log(new_text)
+    
+        //append 
+        new_comment.appendChild(new_text)
+        new_comment.appendChild(new_span)
+        
+        //insert the new comment
+        document.querySelector('#comments').append(new_comment)
+    
+        
+        
+        //Used for storing the comments inside the local storage
+        let previous = window.localStorage.getItem('comments')
+        
+        if (previous == null)
+            window.localStorage.setItem('comments', new_comment.outerHTML)
+        else
+            window.localStorage.setItem('comments', previous+new_comment.outerHTML)
+}
 
-    let new_text = document.createElement('p')
-    new_text.textContent = comment
 
-    let new_span = document.createElement('span')
-    new_span.textContent = 'posted by '+ name + " | " + date 
-    
-  
-    console.log(new_text)
+comment_button.addEventListener("click", () => {
 
-    new_comment.appendChild(new_text)
-    new_comment.appendChild(new_span)
+    //first element must to return a Promise
+    var getPosition = function (options) {
+        return new Promise(function (resolve, reject) {
+          navigator.geolocation.getCurrentPosition(resolve, reject, options);
+        });
+    }
+      
+    getPosition()
+    .then((position) => {
+        lat = position.coords['latitude']
+        long = position.coords['longitude']
+        return lat+','+long
+    })
+    .then((latLong)=>{
+        api= "https://maps.googleapis.com/maps/api/geocode/json?latlng="+latLong+"&key=AIzaSyCLgL8NUcjeqaxkGR-KhcPpkVJLraMtwfQ"
+        return fetch(api)
+    })
+    .then((response) => { return response.json() })
+    .then((data) => { return data.results[9]['formatted_address'] })
+    .then((city_country) => { create_comment(city_country) })
     
-    document.querySelector('#comments').append(new_comment)
-    
-    //Used for storing the comments inside the local storage
-    let previous = window.localStorage.getItem('comments')
-    
-    if (previous == null)
-        window.localStorage.setItem('comments', new_comment.outerHTML)
-    else
-        window.localStorage.setItem('comments', previous+new_comment.outerHTML)
+    .catch((err) => {
+        console.error(err.message);
+    });
 })
+
+
 
 //Point 7.c show the comments stored in the local storage
 window.addEventListener('load', (event) => {
@@ -288,55 +326,3 @@ window.localStorage.clear();
 
 //remove_local_storage()
 
-
-// Point 7.b geo-localization API
-var geocoder;
-
-function error(){
-    alert("Geocoder failed");
-  }
-
-  function success(position) {
-    var lat = position.coords.latitude;
-    var lng = position.coords.longitude;
-    processLatLng(lat, lng)
-}
-
-function get_city_region(){
-    if (navigator.geolocation)
-        navigator.geolocation.getCurrentPosition(success, error);
-
-}
- 
-
-function processLatLng(lat, lng) {
-    var geocoder;
-    geocoder = new google.maps.Geocoder();
-    var latlng = new google.maps.LatLng(lat, lng);
-
-    geocoder.geocode(
-        {'latLng': latlng}, 
-        function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                if (results[0]) {
-                    var add= results[0].formatted_address ;
-                    var  value=add.split(",");
-
-                    count=value.length;
-                    country=value[count-1];
-                    state=value[count-2];
-                    city=value[count-3];
-                    console.log("city name is: " + city)
-                }
-                else  {
-                   console.log("address not found")
-                }
-            }
-            else {
-                console.log("Geocoder failed due to: " + status)
-            }
-        }
-    );
-}
-
-//get_city_region()
