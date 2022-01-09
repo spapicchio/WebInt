@@ -125,7 +125,6 @@ article.video {
 
 article.video h2 {
 	font-size: 2.1em;
-	letter-spacing: 1.5;
 	
 }
 
@@ -241,7 +240,7 @@ footer#footer {
 
 .form-log-in{
 	max-width: 500px;
-	padding: px 12px 10px 20px;
+	padding: 10px 12px 10px 20px;
 	font: 13px Arial, Helvetica, sans-serif;
 }
 .form-log-in-heading{
@@ -266,7 +265,7 @@ footer#footer {
 }
 
 .form-log-in .tel-number-field{
-	width: 60px;
+	width: 100px;
 	text-align: center;
 }
 
