@@ -234,7 +234,7 @@ function create_comment(city_country){
         if (storage.getItem(name) == null) 
             {log_in();return}
     
-        // Select where to add the comment
+        // Select the text of the contet
         let comment = document.querySelector('#comment').value
     
         //select the date
@@ -261,7 +261,7 @@ function create_comment(city_country){
         new_comment.appendChild(new_span)
         
         //insert the new comment
-        document.querySelector('#comments').append(new_comment)
+        document.querySelector('#comments div').appendChild(new_comment)
     
         
         
@@ -315,7 +315,7 @@ window.addEventListener('load', (event) => {
         let value=localStorage.getItem(keys[i])
         let dir = document.createElement('div')
         dir.innerHTML = value
-        document.querySelector('#comments').append(dir)
+        document.querySelector('#comments div').append(dir)
     }
 
   });
@@ -326,3 +326,72 @@ window.localStorage.clear();
 
 //remove_local_storage()
 
+
+//Jukebox
+
+const videos = [
+    "https://upload.wikimedia.org/wikipedia/commons/2/25/Sintel_extract_new.ogv",
+    "https://upload.wikimedia.org/wikipedia/commons/7/7a/Preston_Mill_gear_in_action.webm",
+    "https://upload.wikimedia.org/wikipedia/commons/e/e8/Proffreading.webm",
+    "https://upload.wikimedia.org/wikipedia/commons/4/49/Nuclearcallbloodsta.webm"
+]
+const videos_name = [
+    'Wonderful Game',
+    'Wonderful Mechanism',
+    'Wonderful Book',
+    'Nuclear Cell',
+]
+var video_index = [0,1,2,3]
+
+var source1 = document.querySelector('#source-1')
+var source2 = document.querySelector('#source-2')
+var source3 = document.querySelector('#source-3')
+
+function upload_juk(index){
+
+    
+
+
+    let i_0 = (video_index[0] + index) % 4
+    video_index[0] = (video_index[0] + index) % 4
+
+    document.querySelector('article h2').innerHTML = 'Playing video: ' + videos_name[video_index[0]] 
+    
+
+    let i_1 = (video_index[1] + index) % 4
+    video_index[1] = (video_index[1] + index) % 4
+
+    let i_2 = (video_index[2] + index) % 4
+    video_index[2] = (video_index[2] + index) % 4
+    
+    let i_3 = (video_index[3] + index) % 4
+    video_index[3] = (video_index[3] + index) % 4
+
+    source.setAttribute('src', videos[i_0])
+    source1.setAttribute('src', videos[i_1])
+    source2.setAttribute('src', videos[i_2])
+    source3.setAttribute('src', videos[i_3])
+
+    document.querySelector('#video-1').load()
+    document.querySelector('#video-2').load()
+    document.querySelector('#video-3').load()
+    video.load()
+
+
+}
+
+upload_juk(0)
+
+document.querySelector('#video-1').addEventListener('click', () => { 
+    upload_juk(1) 
+})
+document.querySelector('#video-2').addEventListener('click', () => {    
+    upload_juk(2)
+})
+document.querySelector('#video-3').addEventListener('click', () => {    
+    upload_juk(3)
+})
+
+video.addEventListener('ended', () => {
+    upload_juk(1)
+  });

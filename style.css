@@ -21,6 +21,10 @@ address {display:inline; }
 /*%%%%%%%%%%%% END %%%%%%%%%%%%*/
 
 /*%%%%%%%%%%%% GENERAL STYLE %%%%%%%%%%%%*/
+.container{
+	display: inline-block;
+}
+
 body {
 	font-family: Helvetica, Arial, sans-serif;
 	font-size: 100%;
@@ -63,9 +67,8 @@ nav#navigation_bar {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	text-align: center;
-
-    background-color: rgb(206, 241, 209);
-    overflow: hidden;
+    
+	display: inline-block;
 
 }
 
@@ -75,10 +78,12 @@ nav#navigation_bar ul {
 	width: 100%;
 }
 
-nav#navigation_bar ul li {
+#navigation_bar ul li {
 	display: inline;
 	float: left;
 	margin: 0;
+	background-color: rgb(206, 241, 209);
+	width:25%;
 }
 
 nav#navigation_bar ul li a {
@@ -290,6 +295,25 @@ div.cleaner {
 	visibility: hidden;
 	
 }
+/*%%%%%%%%%%%% Jukebox %%%%%%%%%%%%%*/
+.jukebox {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+
+}
+.jukebox video{
+	display: block;
+	float: left;
+	width:25%;
+	height: 150px;
+	margin-top: 10px;
+	margin-bottom:  25px;
+}
+
+div#comments{
+	width:100%
+}
 
 
 /*%%%%%%%%%%%% Useful css %%%%%%%%%%%%%*/
@@ -331,5 +355,20 @@ input#videoUrl {
   }
 
 
+  @media screen and (max-width: 800px) {
+	aside#sidebar, section#content, section video{
+	  width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+	}
+	.jukebox{
+		display: inline-block;
+	}
+	.jukebox video{
+		width: 100%;
+	}
+	#navigation_bar, #navigation_bar ul,  #navigation_bar ul li{
+		display: inline-block;
+		width:100%;
 
+	}
+  }
 

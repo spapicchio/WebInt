@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<link rel="stylesheet" href="style.css" type="text/css"/>
 		
@@ -13,113 +14,113 @@
 
 <div class="container">
 
-<!--TITLE-->
-<header id="title">
-	<h1><a href="#">You Stream</a></h1>
-</header>
+	<!--TITLE-->
+	<header id="title">
+		<h1><a href="#">You Stream</a></h1>
+	</header>
 
-<!--NAVIGATION BAR-->
-<nav id="navigation_bar">
-	<ul>
-		<li><a href="#">Home</a></li>
-		<li><a href="#">Profile</a></li>
-		<li><a href="#">Favourite Streamers</a></li>
-		<li><a href="#">Favourites Videos</a></li>
-	</ul>
-</nav>
+	<!--NAVIGATION BAR-->
+	<nav id="navigation_bar">
+		<ul>
+			<li><a href="#">Home</a></li>
+			<li><a href="#">Profile</a></li>
+			<li><a href="#">Favourite Streamers</a></li>
+			<li><a href="#">Favourites Videos</a></li>
+		</ul>
+	</nav>
 
 <!--SECTION-->
-<section id="content">
-	
-	<!--ARTICLE-->
-	<article class="video">
-		<header class="video_header">
-			<h2><a href="#">Wonderful game</a></h2>
-		</header>
-		<div id='video_div'>
-			<video controls>
-				<source id="source" src="https://upload.wikimedia.org/wikipedia/commons/2/25/Sintel_extract_new.ogv" type="video/ogg"/>
-			</video>
-		</div>
-		<div id='comments'>
-			<h5>Comments</h5>
-			
-			<input type="text" placeholder="insert you comment" id=comment />
-			<input type="text" placeholder="insert you Name" id=name-comment />
-			<input type="button" value="insert" id="comment_button" />
-
-		</div>
+	<section id="content">
 		
-        <div class="comment-author">
-			<p>NEW COMMENT</p>
-			<span>posted by Simone Papicchio</span>
-			<span> | Date</span>
-			<span> | Location</span>
-		</div>	
-		<div class="comment-author">
-			<address>posted by <a href="#">Simone Papicchio</a></address>
-			<span> | <a href="#" >View comments</a></span>
-			<span> | <a href="#" >Share</a></span>
-		</div>	
-	</article>
-	
-</section>
+		<!--ARTICLE-->
+		<article class="video">
+			<header class="video_header">
+				<h2></h2>
+			</header>
+			<div id='video_div'>
+				<video controls>
+					<source id="source" src="https://upload.wikimedia.org/wikipedia/commons/2/25/Sintel_extract_new.ogv" type="video/ogg"/>
+				</video>
+			</div>
 
-<!--SIDEBAR NAVIGATION-->
-<aside id="sidebar">
-	<nav id="categories" class="side_navigation">
+			<div class=jukebox>
+				<video controls id=video-1>
+					<source id="source-1" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Preston_Mill_gear_in_action.webm" type="video/ogg"/>
+				</video>
+				<video controls id=video-2>
+					<source id="source-2" src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Proffreading.webm" type="video/ogg"/>
+				</video>
+				<video controls id=video-3>
+					<source id="source-3" src="https://upload.wikimedia.org/wikipedia/commons/4/49/Nuclearcallbloodsta.webm" type="video/ogg"/>
+				</video>
+			</div>
+			<div id='comments'>
+				<h5>Comments</h5>
+				<div></div>
+				<input type="text" placeholder="insert you comment" id=comment />
+				<input type="text" placeholder="insert you Name" id=name-comment />
+				<input type="button" value="insert" id="comment_button" />
 
-		<!-- FORM -->
-		<div class=form_div>
-			<form id="nav_form">
+			</div>
+		</article>
+		
+	</section>
 
-				<div>
-					<label for="furl">URL</label>
-					<input type="text" id="furl" name="url" placeholder="the video's url">
-					<input type="button" value="Play" id="url_button">
-				</div>
+	<!--SIDEBAR NAVIGATION-->
+	<aside id="sidebar">
+		<nav id="categories" class="side_navigation">
+
+			<!-- FORM -->
+			<div class=form_div>
+				<form id="nav_form">
+
+					<div>
+						<label for="furl">URL</label>
+						<input type="text" id="furl" name="url" placeholder="the video's url">
+						<input type="button" value="Play" id="url_button">
+					</div>
+					
+					<div>
+						<label for="fminute">Offset</label>
+						<input type="text" id="fminute" name="minute" placeholder="offset in the video">
+						<input type="button" value="Go to offset" id="offset_butt">
+					</div>
+
+					<div>
+						<input type="button" value="Rotate" id="rotate">
+						<input type="button" value="Preview" id="preview">
+						<input type="button" value="Mirror" id="mirror">
+					</div>
+
+					<div>
+						
+						<input type="radio" id="control" name="radio" value="control"
+								checked>
+						<label for="huey">Control</label>
+						
+						
+						<input type="radio" id="no_control" name="radio" value="no_control">
+						<label for="dewey">No Control</label>
+					</div>
 				
-				<div>
-					<label for="fminute">Offset</label>
-					<input type="text" id="fminute" name="minute" placeholder="offset in the video">
-					<input type="button" value="Go to offset" id="offset_butt">
-				</div>
+				</form>
+			</div>
+		</nav>
+		<nav id="archive" class="side_navigation">
+			<h5>Sponsored Video (mouse hover) </h5>
+				<video controls class = "b r" muted='muted' >
+					<source src="https://upload.wikimedia.org/wikipedia/commons/7/76/Conversation_Hour_for_Human_Rights_Policy_Launch.webm" type="video/ogg"/>
+				</video>
 
-				<div>
-					<input type="button" value="Rotate" id="rotate">
-					<input type="button" value="Preview" id="preview">
-					<input type="button" value="Mirror" id="mirror">
-				</div>
+		</nav>	
+	</aside>
 
-				<div>
-					
-					<input type="radio" id="control" name="radio" value="control"
-							checked>
-					<label for="huey">Control</label>
-					
-					
-					<input type="radio" id="no_control" name="radio" value="no_control">
-					<label for="dewey">No Control</label>
-				</div>
-			
-			</form>
-		  </div>
-	</nav>
-	<nav id="archive" class="side_navigation">
-		<h5>Sponsored Video</h5>
-			<video controls class = "b r" muted='muted' >
-				<source src="https://upload.wikimedia.org/wikipedia/commons/7/76/Conversation_Hour_for_Human_Rights_Policy_Launch.webm" type="video/ogg"/>
-			</video>
 
-	</nav>	
-</aside>
 
-<div class="cleaner"></div>
 </div>
-
 <!--FOOTER-->
 <footer id="footer">
-	
+		
 	<div class="form-log-in">
 		<div class="form-log-in-heading">Log in to the webpage</div>
 			
@@ -141,9 +142,8 @@
 
 			<label><span> </span><input type="submit" value="Submit" id="submit-log-in" /></label>
 		</form>
-		</div>
-</footer>	
-
+	</div>
+</footer>
 <script src="script.js"></script>
 
 </body>
