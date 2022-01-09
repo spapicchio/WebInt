@@ -258,12 +258,16 @@ comment_button.addEventListener("click", () => {
     
     document.querySelector('#comments').append(new_comment)
     
-    console.log(new_comment.outerHTML)
-    
+    //Used for storing the comments inside the local storage
     let previous = window.localStorage.getItem('comments')
-    window.localStorage.setItem('comments', previous+new_comment.outerHTML)
+    
+    if (previous == null)
+        window.localStorage.setItem('comments', new_comment.outerHTML)
+    else
+        window.localStorage.setItem('comments', previous+new_comment.outerHTML)
 })
 
+//Point 7.c show the comments stored in the local storage
 window.addEventListener('load', (event) => {
     keys = Object.keys(localStorage)
     i = keys.length
