@@ -371,3 +371,9 @@ input#videoUrl {
 	}
   }
 
+/* Set the size of the div element that contains the map */
+#map { height: 180px; }
+
+details {
+	margin-bottom: 10px;
+}

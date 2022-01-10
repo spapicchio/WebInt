@@ -4,8 +4,11 @@
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+	crossorigin=""/>
 	<link rel="stylesheet" href="style.css" type="text/css"/>
+
 		
 	<title>Assignment 1: Streaming Platform</title>
 </head>
@@ -45,18 +48,24 @@
 
 			<div class=jukebox>
 				<video controls id=video-1>
-					<source id="source-1" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Preston_Mill_gear_in_action.webm" type="video/ogg"/>
+					<source id="source-1" src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Preston_Mill_gear_in_action.webm" type="video/webm"/>
 				</video>
 				<video controls id=video-2>
-					<source id="source-2" src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Proffreading.webm" type="video/ogg"/>
+					<source id="source-2" src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Proffreading.webm" type="video/webm"/>
 				</video>
 				<video controls id=video-3>
-					<source id="source-3" src="https://upload.wikimedia.org/wikipedia/commons/4/49/Nuclearcallbloodsta.webm" type="video/ogg"/>
+					<source id="source-3" src="https://upload.wikimedia.org/wikipedia/commons/4/49/Nuclearcallbloodsta.webm" type="video/webm"/>
 				</video>
 			</div>
 			<div id='comments'>
 				<h5>Comments</h5>
 				<div></div>
+				
+
+				<details>
+					<summary>Here will be shown the map of the retrieved position</summary>
+					<div id="map"></div>
+				</details>
 				<input type="text" placeholder="insert you comment" id=comment />
 				<input type="text" placeholder="insert you Name" id=name-comment />
 				<input type="button" value="insert" id="comment_button" />
@@ -109,7 +118,7 @@
 		<nav id="archive" class="side_navigation">
 			<h5>Sponsored Video (mouse hover) </h5>
 				<video controls class = "b r" muted='muted' >
-					<source src="https://upload.wikimedia.org/wikipedia/commons/7/76/Conversation_Hour_for_Human_Rights_Policy_Launch.webm" type="video/ogg"/>
+					<source src="https://upload.wikimedia.org/wikipedia/commons/7/76/Conversation_Hour_for_Human_Rights_Policy_Launch.webm" type="video/webm"/>
 				</video>
 
 		</nav>	
@@ -142,6 +151,10 @@
 		</form>
 	</div>
 </footer>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+crossorigin=""></script>
 <script src="script.js"></script>
 
 </body>

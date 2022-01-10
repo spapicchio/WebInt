@@ -248,6 +248,8 @@ video.addEventListener('ended', () => {
 // Point 6 Log-in 
 var i=1;
 var comment_button= document.querySelector("#comment_button")
+var latitude
+var longitude
 
 function remove_form(){
     document.querySelector('.form-log-in').style.display = 'none'; 
@@ -316,8 +318,30 @@ function create_comment(city_country){
         let new_span = document.createElement('span')
         new_span.textContent = 'posted by '+ name + " | " + date + " | " + city_country
         
+        // Initialize and add the map
+        console.log(latitude)
+        console.log(longitude)
+
+        let map = L.map('map').setView([latitude, longitude], 13);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: 'pk.eyJ1Ijoic2ltb25lLXBhcGljY2hpbyIsImEiOiJja3k5MXF0YjIwMjFkMnducmNycm1tcjgwIn0.YzJXYyPu7KUlIYqZ18qMcg'
+        }).addTo(map);
+
+        var let = L.marker([latitude, longitude]).addTo(map);
+        let circle = L.circle([latitude, longitude], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 250
+        }).addTo(map);
+
         //check for debugging
-        console.log(new_text)
+        //console.log(new_text)
     
         //append 
         new_comment.appendChild(new_text)
@@ -337,6 +361,10 @@ function create_comment(city_country){
             window.localStorage.setItem('comments', previous+new_comment.outerHTML)
 }
 
+function define_lat_long(lat, long){
+    latitude = lat
+    longitude = long
+}
 
 comment_button.addEventListener("click", () => {
 
@@ -351,6 +379,7 @@ comment_button.addEventListener("click", () => {
     .then((position) => {
         lat = position.coords['latitude']
         long = position.coords['longitude']
+        define_lat_long(lat, long)
         return lat+','+long
     })
     .then((latLong)=>{
@@ -388,3 +417,4 @@ window.localStorage.clear();
 }
 
 //remove_local_storage()
+
