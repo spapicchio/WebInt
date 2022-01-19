@@ -1,31 +1,50 @@
 <template>
-    <nav class="navbar">
-        <div id=first>
-            <img src='../assets/favicon.png' @click="iconClick">
-        </div>
+<div class=introduction>
+    <img src='../assets/logo.png' @click="iconClick">
+    
+    <div class=user>
+        <img
+        id=user-image
+        v-if = "form.seen"
+        :src="form.picture"
+        :alt="`${form.firstName} ${form.lastName}`"
+        />
+        <h1>Hello {{form.completName}}</h1>
+        <h3>Welcome to Eurecom One!</h3>
+
+    </div>
+    
+</div>
+    <nav>
         
-        <Button :onClick="userClick" class_name="button" text="user-name"></Button>
-        <Button :onClick="whishClick" class_name="button fa fa-heart" text=""></Button>
-        <Button :onClick="logoutClick" class_name="button is-danger" text="Log-out"></Button>
-    
-    
+
     </nav>
 </template>
 
 <script>
-import Button from "./Button"
+
 
 export default {
     name: 'Navbar',
-    components:{
-        Button
+    
+    data(){
+        // it contains all the detail of the account
+        var obj = JSON.parse(sessionStorage.getItem("account"));
+        console.log(obj)
+        return {
+            form: obj
+        }
     },
-    props: {        
+    components:{
+      
+    },
+    props: {  
+           
     },
     methods: {
         iconClick() {
             console.log('Icon clicked')
-            this.$router.push("")
+            this.$router.push("/home")
         },
         userClick(){
             console.log('User clicked')
@@ -45,12 +64,58 @@ export default {
 </script>
 
 <style scoped>
-img{
-    max-width: 30%;
-    margin-left: 10px;
-    margin-top: 2px;
-    margin-bottom: 2px;
+.introduction{
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    height: 150px;
+    justify-content: space-between;
+    border-bottom: solid black;
+
 }
+
+.introduction img{
+   max-width: 30%;
+   margin: 10px 0 auto 50px;
+   float:right;
+}
+
+.introduction #user-image {
+  border-radius: 50%;
+  border: 5px #333 solid;
+  margin-bottom: .8rem;
+}
+
+.user{
+    margin: 40px 40px auto auto;
+    width: 40%; 
+}
+.user img{
+    margin: 0 0 30px 0;
+    width: 100px; 
+}
+.user h1,
+.user h3{
+    float: right;
+    margin-right:30px;
+}
+
+
+h1{
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 2em;
+    text-align: center;
+    color: #2c3e50;
+}
+h3 {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.5em;
+    text-align: center;
+    color: #2c3e50;
+}
+
 nav #first{
     width: 70%;
     display: flex;
@@ -61,7 +126,7 @@ nav{
     margin: 0 auto 1% auto;
     background-color: black;
     justify-content: space-around;
-    align-items: center;
+    align-items: left;
     border-radius: 5px;
 }
 

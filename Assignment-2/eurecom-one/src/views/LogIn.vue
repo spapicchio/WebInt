@@ -86,7 +86,8 @@ export default ({
                 picture: '',
                 password: '',
                 seen: false,
-                id: 1
+                id: "1",
+                complete: ''
             },
             formClass: {
                 name: {
@@ -161,6 +162,7 @@ export default ({
             const res = await fetch('https://randomuser.me/api')
             const { results } = await res.json();
             console.log(results) 
+            this.form.complete=results,
             this.form.firstName =  results[0].name.first,
             this.form.lastName= results[0].name.last,
             this.form.completName = this.form.firstName + " " + this.form.lastName,
@@ -188,9 +190,13 @@ export default ({
                     alert("missing values on the form")
                 }
                 else{
+
+                    var obj = JSON.stringify(this.form)
                     var storage = window.sessionStorage;
-                    storage.setItem(this.form.id, this.form);
+                    storage.setItem("account", obj);
+
                     this.$router.push('/home')
+                    //this.$router.push({name:'Home', params: {form: this.form}})
                 }
 
             },
