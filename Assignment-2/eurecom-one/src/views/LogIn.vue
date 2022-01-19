@@ -9,35 +9,54 @@
 
         <img
         id=user-image
-        v-if = "seen"
-        :src="picture"
-        :alt="`${firstName} ${lastName}`"
-        :class="gender"
+        v-if = "form.seen"
+        :src="form.picture"
+        :alt="`${form.firstName} ${form.lastName}`"
         />
 
         <div class="field">
-            <p class="control has-icons-left">
-                <input :class=nameClass type="text" placeholder="Name and Surname" :value="`${firstName} ${lastName}`">
+
+            <p :class=formClass.name.pClass>
+                <input :class=formClass.name.inputClass type="text" placeholder="Name and Surname" v-model=form.completName @blur="nameCheck(event)">
                 <span class="icon is-small is-left">
                     <i class="fas fa-file-signature"></i>
                 </span>
-
+                <span class="icon is-small is-right" v-if = "formClass.name.seen">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="icon is-small is-right" v-if = "formClass.name.error">
+                    <i class="fas fa-envelope"></i>
+                </span>
             </p>
         </div>
+
         <div class="field">
-            <p class="control has-icons-left">
-                <input class="input" type="email" placeholder="Email" :value=email>
+            <p :class=formClass.email.pClass>
+                <input :class=formClass.email.inputClass type="email" placeholder="Email" v-model=form.email  @blur="emailCheck()">
                 <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+                <span class="icon is-small is-right" v-if = "formClass.email.seen">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="icon is-small is-right" v-if = "formClass.email.error">
                     <i class="fas fa-envelope"></i>
                 </span>
 
             </p>
         </div>
+
         <div class="field">
-            <p class="control has-icons-left">
-                <input class="input" type="password" placeholder="Password" :value=password @input="check($event)">
+            <p :class=formClass.psw.pClass>
+                <input :class=formClass.psw.inputClass type="password" placeholder="Password" v-model=form.password  @blur="pswCheck()">
                 <span class="icon is-small is-left">
                     <i class="fas fa-lock"></i>
+                </span>
+                <span class="icon is-small is-right" v-if = "formClass.psw.seen">
+                    <i class="fas fa-check"></i>
+                </span>
+                <span class="icon is-small is-right" v-if = "formClass.psw.error">
+                    <i class="fas fa-envelope"></i>
                 </span>
             </p>
             </div>
@@ -59,40 +78,124 @@
 export default ({
     data() {
         return {
-            firstName: '',
-            lastName: '',
-            email: '',
-            gender: '',
-            picture: '',
-            password: '',
-            nameClass: 'input',
-            emailClass:'',
-            passwordClass:'',
-            seen: false
+            form: {
+                firstName: '',
+                lastName: '',
+                completName: '',
+                email: '',
+                picture: '',
+                password: '',
+                seen: false,
+                id: 1
+            },
+            formClass: {
+                name: {
+                    inputClass: 'input',
+                    pClass: 'control has-icons-left',
+                    seen: false,
+                    error: false
+                },
+                email: {
+                    inputClass: 'input',
+                    pClass: 'control has-icons-left',
+                    seen: false,
+                    error: false
+                },
+                psw: {
+                    inputClass: 'input',
+                    pClass: 'control has-icons-left',
+                    seen: false,
+                    error: false
+                },
+                nameClass: 'input',
+                emailClass:'',
+                passwordClass:'',
+            }        
         }
     },
     methods:{
+        nameCheck(){
+                //if (! condition ){ // used to ad some kind of constraint on name
+                //    this.formClass.name.inputClass = "input is-danger"
+                //    this.formClass.name.error= true 
+                //   alert('insert a valid Name')
+                //}
+                //else{
+                    this.formClass.name.inputClass = "input is-success"
+                    this.formClass.name.seen= true
+                //}
+                
+                this.formClass.name.pClass = "control has-icons-left has-icons-right"
+                
+            },
+        emailCheck(){
+
+                if (! this.form.email.includes('@')){ 
+                    this.formClass.email.inputClass = "input is-danger"
+                    this.formClass.email.error= true 
+                    alert('insert a valid Email')
+                }
+                else{
+                    this.formClass.email.inputClass = "input is-success"
+                    this.formClass.email.seen= true
+                }
+                this.formClass.email.pClass = "control has-icons-left has-icons-right"
+            },
+
+        pswCheck(){
+                //if (! (true == true) ){ // used to add some kind of constraints 
+                //    this.formClass.psw.inputClass = "input is-danger"
+                //    this.formClass.psw.error= true 
+                //    alert('insert a valid Password')
+                //}
+                //else{
+                    this.formClass.psw.inputClass = "input is-success"
+                    this.formClass.psw.seen= true
+                //}
+                this.formClass.psw.pClass = "control has-icons-left has-icons-right"
+            },
+        
         async getUser(){
             console.log('clicked Random User') 
             //this.$router.push("/Home")
             const res = await fetch('https://randomuser.me/api')
             const { results } = await res.json();
-            console.log(results)
-            this.firstName =  results[0].name.first,
-            this.lastName= results[0].name.last,
-            this.email= results[0].email ,
-            this.picture= results[0].picture.large
-            this.password= results[0].login.password
-            this.seen=true
+            console.log(results) 
+            this.form.firstName =  results[0].name.first,
+            this.form.lastName= results[0].name.last,
+            this.form.completName = this.form.firstName + " " + this.form.lastName,
+            this.form.email= results[0].email ,
+            this.form.picture= results[0].picture.large
+            this.form.password= results[0].login.password
+            this.form.seen=true
+
+            this.formClass.name.inputClass = "input is-success"
+            this.formClass.name.pClass = "control has-icons-left has-icons-right"
+            this.formClass.name.seen= true
+
+            this.formClass.email.inputClass = "input is-success"
+            this.formClass.email.pClass = "control has-icons-left has-icons-right"
+            this.formClass.email.seen= true
+
+            this.formClass.psw.inputClass = "input is-success"
+            this.formClass.psw.pClass = "control has-icons-left has-icons-right"
+            this.formClass.psw.seen= true
             },
 
-            logIn(){
+        logIn(){
                 console.log("LogIn clicked");
+                if (!this.form.completName || !this.form.email || !this.form.password){
+                    alert("missing values on the form")
+                }
+                else{
+                    var storage = window.sessionStorage;
+                    storage.setItem(this.form.id, this.form);
+                    this.$router.push('/home')
+                }
+
             },
+
             
-            check(event){
-                console.log(event)
-            }
         }
 })
 </script>
