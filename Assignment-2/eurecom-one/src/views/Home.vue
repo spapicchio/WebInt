@@ -1,10 +1,25 @@
 <template>
-  <Navbar/>
+
+<div class="wrapper">
+    <header class="header">Header</header> <!--Need to be changed with Nav Bar-->
+     <!--Is missing section but if I put it, it becomes shits-->
+    
+    <article class="main">
+        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>  
+    </article>
+    <SideBar />
+
+    <aside class="aside aside-2">Aside 2</aside>
+    <Footer />
+</div>
+
 </template>
 
 <script>
 // @ is an alias to /src
-import Navbar from '../components/Navbar.vue';
+//import Navbar from '../components/Navbar.vue';
+import SideBar from '../components/SideBar.vue';
+import Footer from '../components/Footer.vue';
 
 export default {
   name: "Home",
@@ -21,7 +36,60 @@ export default {
   },
 
   components: {
-    Navbar
+    //Navbar,
+    SideBar,
+    Footer
   },
 };
 </script>
+
+<style scoped>
+.wrapper {
+  display: flex;  
+  flex-flow: row wrap;
+  text-align: center; 
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+.header {
+  background: tomato;
+}
+
+.footer {
+  background: lightgreen;
+}
+
+.main {
+  text-align: left;
+  background: deepskyblue;
+}
+
+.aside-1 {
+  background: rgba(134, 134, 134, 0.151);
+}
+
+.aside-2 {
+  background: hotpink;
+}
+
+@media all and (min-width: 600px) {
+  .aside { flex: 1 0 0; }
+}
+
+@media all and (min-width: 800px) {
+  .main    { flex: 3 0px; }
+  .aside-1 { order: 1; } 
+  .main    { order: 2; }
+  .aside-2 { order: 3; }
+  .footer  { order: 4; }
+}
+
+body {
+  padding: 2em; 
+}
+
+</style>

@@ -207,6 +207,7 @@ export default ({
 </script>
 
 <style scoped>
+
 button{
     margin: 0px 10px 0 10px
 }
@@ -232,6 +233,7 @@ div{
 
 .container{
     display:block;
+    margin: 100px auto auto auto
 }
 
 .form h1,
