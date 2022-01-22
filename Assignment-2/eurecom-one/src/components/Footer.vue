@@ -15,7 +15,7 @@
         ·
         <a href="https://www.linkedin.com/school/eurecom/" target="_blank">LinkedIn</a>
         ·
-        <a href="#">Contact</a>
+        <a href="/about">About</a>
       </p>
     </div>
 

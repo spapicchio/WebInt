@@ -57,11 +57,7 @@ export default {
   border-bottom: solid black;
 }
 
-.header img {
-  max-width: 30%;
-  margin: 10px 0 auto 50px;
-  float: right;
-}
+
 
 
 

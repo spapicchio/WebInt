@@ -95,6 +95,7 @@ export default {
   margin-bottom: 0.8rem;
 }
 
+
 .user h1 {
   float: right;
   margin-right: 30px;
