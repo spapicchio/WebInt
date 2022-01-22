@@ -57,7 +57,9 @@ export default {
   border-bottom: solid black;
 }
 
-
+.header div{
+    margin-top: 50px;
+}
 
 
 

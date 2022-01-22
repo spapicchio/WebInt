@@ -1,5 +1,13 @@
 <template>
-  <router-view />
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<title>Assignment 2: Eurecom One! </title>
+</head>
+
+<router-view />
+
 </template>
 
 <style>

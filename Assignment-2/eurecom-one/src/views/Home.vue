@@ -41,7 +41,7 @@ export default {
     SideBar,
     Footer,
     Nav,
-    Header
+    Header,
   },
 };
 </script>
