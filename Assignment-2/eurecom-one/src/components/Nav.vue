@@ -1,9 +1,8 @@
 <template>
   <div class="nav">
-    <a class="active" href="#home">Home</a>
-    <a href="#news">News</a>
-    <a href="#email">Email</a>
-    <a href="#contact">Contact</a>
+    <a id="homeBtn" href="/Home" class="active">Home</a>
+    <a id="mailBtn" href="/Mail">Email</a>
+    <a id="aboutBtn" href="/About">About</a>
     <div class="nav-right">
       <div class="user">
         <a href="#search"

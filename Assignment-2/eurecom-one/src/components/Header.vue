@@ -57,11 +57,9 @@ export default {
   border-bottom: solid black;
 }
 
-.header div{
-    margin-top: 50px;
+.header div {
+  margin-top: 50px;
 }
-
-
 
 .user h3 {
   float: right;
@@ -78,12 +76,22 @@ h3 {
 }
 
 @media screen and (max-width: 800px) {
-  .user h1,
   .user h3 {
     float: right;
     margin-right: 30px;
     margin-bottom: 5px;
-    font-size: 1em;
+    font-size: 0.8em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .user h3 {
+    font-size: 0px;
+  }
+  img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 </style>
