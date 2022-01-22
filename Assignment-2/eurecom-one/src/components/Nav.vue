@@ -92,20 +92,25 @@ export default {
 .nav-right #user-image {
   border-radius: 50%;
   border: 5px #333 solid;
-  margin-bottom: 0.8rem;
+  margin-top: 0px;
+  scale: 0.4;
+  top: -40px;
+  position: relative;
 }
 
-
+.user {
+  height: 8px;
+}
 .user h1 {
   float: right;
-  margin-right: 30px;
+  margin-left: auto;
   margin-bottom: 5px;
 }
 
 h1 {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-size: 2em;
+  font-size: 1em;
   text-align: center;
   color: #f2f2f2;
 }
