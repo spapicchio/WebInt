@@ -104,7 +104,7 @@
                 <h3>Fantastic Party at the house of <br> <b>{{completeName}}</b> </h3>
                 <p>Thank you {{firstName}} for invinting all the Eurecom students at your house</p>
                 <p> <b> Party details: </b> {{partyDateCity}}</p>
-                <details>
+                <details @click="detailClick">
 					<summary>show map of the party location</summary>
                     <div id="map"></div>
                 </details>
@@ -142,6 +142,7 @@ data(){
            latitude: "",
            longitude: "",
            partyDateCity: "",
+           count: 0,
 
         }
     },
@@ -171,6 +172,13 @@ methods:{
         this.showForm =false;
         this.sent = true;
         console.log(this.picked + " | " + this.selected + " | " + this.mailBDE)
+    },
+    detailClick(){
+        console.log("detail clicked");
+        if (this.count == 0){
+            this.setupLeafletMap()
+            this.count = 1;
+        }
     },
     creationMap(){
 
@@ -208,9 +216,6 @@ methods:{
         // Initialize and add the map
         console.log(this.latitude)
         console.log(this.longitude)
-
-        this.setupLeafletMap()
-
     },
     setupLeafletMap: function () {
             var map = L.map('map').setView([this.latitude, this.longitude], 13);
