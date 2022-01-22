@@ -10,7 +10,7 @@
     </article>
     <SideBar />
 
-    <aside class="aside aside-2">Aside 2</aside>
+    <SideBar2 />
     <Footer />
 </div>
 
@@ -20,6 +20,7 @@
 // @ is an alias to /src
 import Header from '../components/Header.vue';
 import SideBar from '../components/SideBar.vue';
+import SideBar2 from '../components/SideBar2.vue';
 import Footer from '../components/Footer.vue';
 import Nav from '../components/Nav.vue';
 
@@ -39,6 +40,7 @@ export default {
 
   components: {
     SideBar,
+    SideBar2,
     Footer,
     Nav,
     Header,
@@ -67,7 +69,7 @@ export default {
 }
 
 .aside-2 {
-  background: hotpink;
+  background: rgba(134, 134, 134, 0.151);
 }
 
 @media all and (min-width: 600px) {
