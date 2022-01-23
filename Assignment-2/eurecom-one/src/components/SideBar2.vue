@@ -1,8 +1,8 @@
 <template>
-  <aside class="aside aside-2">
-    <div class="event-bde">
-      <hr />
-      <h1>Event BDE</h1>
+    <aside class="aside aside-2">
+    
+    <div class="container event-bde">
+      <h1 class="title ">Event BDE</h1>
       <h3>
         Fantastic Party at the house of <br />
         <b>{{ completeName }}</b>
@@ -17,8 +17,11 @@
         <div id="map">.</div>
       </details>
     </div>
+    <div class=container>
+        <h1 class=title>Eurecom News</h1>
+        <hr>
     <marquee
-      class="marquee"
+      class=" marquee"
       height="50%"
       width="100%"
       behavior="scroll"
@@ -26,7 +29,7 @@
       scrollamount="2"
       onmouseover="this.stop();"
       onmouseout="this.start();"
-    >
+        >
       <ul>
         <li>
           <p class="title">Title 1</p>
@@ -36,7 +39,7 @@
             class="link"
           >
             <iframe
-              width="100%"
+              width="90%"
               src="https://www.youtube.com/embed/uIlFcgNijnM"
               title="YouTube video player"
               frameborder="0"
@@ -58,7 +61,7 @@
         <li>
           <p class="title">Title 3</p>
           <iframe
-            width="100%"
+            width="90%"
             src="https://www.youtube.com/embed/fuWP3eLudc4"
             title="YouTube video player"
             frameborder="0"
@@ -78,6 +81,7 @@
         </li>
       </ul>
     </marquee>
+    </div>
   </aside>
 </template>
 
@@ -195,6 +199,35 @@ export default {
 </script>
 
 <style scoped>
+
+.container{
+    display: inline-block;
+    background-color: white;
+    border: 1px solid;
+    padding: 0px;
+    box-shadow: 0px 5px 10px 0px #888888;
+    margin: 20px 5px;
+    width: 250px;
+    
+    
+}
+.container h1,
+.container p,
+.container details,
+.container marquee{
+    margin: 10px 5px 10px 5px;
+}
+
+
+
+.link img{
+    width: 90%;
+}
+
+marquee iframe{
+    margin: 0 auto 0 auto;
+}
+
 #map {
   height: 180px;
   widows: 60%;

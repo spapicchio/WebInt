@@ -179,15 +179,16 @@ methods:{
     margin-right: 10px;
 }
 .contact p{
-    width: 300px;
+    width: 100%;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     font-size: 0.8em;
     margin-bottom: 20px;
+     margin-right: 10px;
 }
 
 
 .contact p button{
-    margin: 30px auto 5px 25%;
+    margin: 10px auto 5px 25%;
     max-width: 300px;
 }
 .contact-form{

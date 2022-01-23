@@ -4,12 +4,18 @@
     <Header /> 
     
     <Nav />
-    
-    <article class="main">
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>  
-    </article>
-    <SideBar />
+        <article class="main">
+            <CardArticle />
+        </article>
 
+        <article class="main">
+            <CardArticle />
+        </article>
+
+        <article class="main">
+            <CardArticle />
+        </article>
+    <SideBar />
     <SideBar2 />
     <Footer />
 </div>
@@ -17,12 +23,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Header from '../components/Header.vue';
 import SideBar from '../components/SideBar.vue';
 import SideBar2 from '../components/SideBar2.vue';
 import Footer from '../components/Footer.vue';
 import Nav from '../components/Nav.vue';
+import CardArticle from '../components/CardArticle.vue';
 
 export default {
   name: "Home",
@@ -44,33 +50,48 @@ export default {
     Footer,
     Nav,
     Header,
+    CardArticle,
   },
 };
 </script>
 
 <style scoped>
 .wrapper {
-  display: flex;  
-  flex-flow: row wrap;
-  text-align: center; 
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+    grid-template-rows: 150px 3% 20% 20% 20% 20%;
 }
-
-.wrapper > * {
-  padding: 10px;
-  flex: 1 100%;
+.header{
+    grid-column: 1/6;
+    grid-row-start:1;
+}
+.nav{
+    grid-row-start: 2;
+    grid-column: 1/6;
 }
 .main {
-  text-align: left;
-  background: deepskyblue;
+    text-align: center;
+    background:  rgba(218, 218, 218, 0.151);
+    grid-column: 2/5;
+    grid-row: 3/7;
 }
 
 .aside-1 {
-  background: rgba(134, 134, 134, 0.151);
+    background: rgba(134, 134, 134, 0.151);
+    grid-column: 1;
+    grid-row: 3/7;
 }
 
 .aside-2 {
-  background: rgba(134, 134, 134, 0.151);
+    background: rgba(134, 134, 134, 0.151);
+    grid-column: 5;
+    grid-row: 3/7;
 }
+.footer{
+    grid-row: 7;
+    grid-column: 1/6;
+}
+
 
 @media all and (min-width: 600px) {
   .aside { flex: 1 0 0; }

@@ -37,10 +37,10 @@
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   width: 100%;
+  height: 100%;
   font: bold 16px sans-serif;
   text-align: left;
   padding: 50px 60px 40px;
-  overflow: hidden;
 }
 
 section {
