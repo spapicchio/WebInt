@@ -5,8 +5,8 @@
     <!-- inside there are the otpions for the email -->
     <div class="aside-1 container">
         <div class="email-option"><button class="button" @click="emailOption('Inbox')"> Inbox</button></div>
-        <div class="email-option"><button class="button" @click="emailOption('Sent')"> Sent</button></div>
-        <div class="email-option"><button class="button" @click="emailOption('Inbox')"> Spam</button></div>
+        <div class="email-option"><button class="button" @click="emailOption('Deleted')"> Deleted</button></div>
+        <div class="email-option"><button class="button" @click="emailOption('Spam')"> Spam</button></div>
     </div>
 
     <!-- inside there are the emails -->
@@ -62,6 +62,10 @@ import { getFirestore, doc, getDoc } from "firebase/firestore"
 export default {
     name: "Mail",
     data(){
+        let spamId = JSON.parse(sessionStorage.getItem("spam"))
+        if (spamId == null) spamId = []
+        let deleteID = JSON.parse(sessionStorage.getItem("delete"))
+        if (deleteID == null) deleteID = []
         this.updateData();
         var obj = JSON.parse(sessionStorage.getItem("account"));
         console.log(obj)
@@ -75,8 +79,8 @@ export default {
             dateSent: "",
             objectSent: "",
             textSent:"",
-            spamId: [],
-            deleteId: [],
+            spamId: spamId,
+            deleteId: deleteID,
             correctId:[],
             email: null,
         }
@@ -95,6 +99,7 @@ export default {
             }
             if(name == 'spam'){
                 this.spamId.push(this.email._id)
+                sessionStorage.setItem("spam", JSON.stringify(this.spamId))
                 this.updateEmails();
                 this.readEmail = false;
                 
@@ -102,6 +107,7 @@ export default {
             }
             if (name == 'delete'){
                 this.deleteId.push(this.email._id)
+                sessionStorage.setItem("delete", JSON.stringify(this.deleteId))
                 this.updateEmails();
                 this.readEmail = false;
                 
@@ -118,13 +124,23 @@ export default {
 
         },
         emailOption(name){
-            if (name == 'inbox'){
-                console.log('inbox');
+            if (name == 'Inbox'){
+                console.log('Inbox');
                 this.updateEmails();
             }
-            if (name == '')
-            this.nameCard = name;
-            this.readEmail = false
+
+            if (name == 'Spam'){
+                console.log(this.spamId);
+                this.correctId = this.emails.filter((email) => {
+                return this.spamId.includes(email._id)
+            })
+            }      
+            if (name == 'Deleted'){
+                console.log('Deleted');
+                this.correctId = this.emails.filter((email) => {
+                    return this.deleteId.includes(email._id)
+                })
+            }
 
 
         },
