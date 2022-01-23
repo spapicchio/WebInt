@@ -1,8 +1,9 @@
 <template>
   <div class="nav">
-    <a id="homeBtn" href="/Home" class="active">Home</a>
-    <a id="mailBtn" href="/Mail">Email</a>
-    <a id="aboutBtn" href="/About">About</a>
+    <a id="homeBtn" @click="iconClick('home')" class="active">Home</a>
+    <a id="mailBtn" @click="iconClick('email')">Email</a>
+    <a id="aboutBtn" @click="iconClick('about')">About</a>
+
     <div class="nav-right">
       <div class="user">
         <a href="#search"
@@ -34,18 +35,10 @@ export default {
   components: {},
   props: {},
   methods: {
-    iconClick() {
-      console.log("Icon clicked");
-      this.$router.push("/home");
+    iconClick(location) {
+      this.$router.push("/" + location);
     },
-    userClick() {
-      console.log("User clicked");
-      this.$router.push("");
-    },
-    whishClick() {
-      console.log("Whish clicked");
-      this.$router.push("whish");
-    },
+
     logoutClick() {
       console.log("LogOut clicked");
       this.$router.push("login");

@@ -4,9 +4,6 @@
     
     <Nav />
     
-    <MailAbout />
-         
-    <MailSideBar />
 
     <Footer />
 </div>
@@ -15,8 +12,6 @@
 <script>
 // @ is an alias to /src
 import Header from '../components/Header.vue';
-import MailAbout from '../components/MailAbout.vue';
-import MailSideBar from '../components/MailSideBar.vue';
 import Footer from '../components/Footer.vue';
 import Nav from '../components/Nav.vue';
 
@@ -36,54 +31,37 @@ export default {
   },
 
   components: {
-    MailSideBar,
     Footer,
     Nav,
     Header,
-    MailAbout
+  
   },
 };
 </script>
 
 <style scoped>
 .wrapper {
-  display: flex;  
-  flex-flow: row wrap;
-  text-align: center; 
+    display: grid;
+    grid-template-rows: 150px 50px 50% 50% 20%;
+    grid-template-columns: 20% 80% 20%;
+    
 }
-
-
-.wrapper > * {
-  padding: 10px;
-  flex: 1 100%;
+.header{
+    grid-column: 1/6;
+    grid-row-start:1;
 }
-.mailAbout {
-  text-align: left;
-  background: rgba(0, 0, 0, 0.151);
+.nav{
+    grid-row-start: 2;
+    grid-column: 1/4;
 }
-
-.mail-aside {
-  background: rgba(134, 134, 134, 0.151);
+.footer{
+    grid-row-start: 4;
+    grid-column: 1/4;
 }
-
 
 
 @media all and (min-width: 600px) {
   .aside { flex: 1 0 0; }
 }
-
-@media all and (min-width: 800px) {
-  .mailAbout    { flex: 3 0px; }
-  .nav          { order: 1  }
-  .mail-aside   { order: 2; } 
-  .mailAbout    { order: 3; }
-  .footer       { order: 5; }
-}
-
-body {
-  padding: 2em; 
-}
-
-
 </style>
 

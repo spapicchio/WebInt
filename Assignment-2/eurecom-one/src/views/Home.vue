@@ -4,7 +4,7 @@
     <Header /> 
     <Nav />
 
-        <article class="card-email">
+        <article  class="card-email">
             <CardArticle :class_name="name"/>
         </article>
 
@@ -41,7 +41,10 @@ export default {
         cardEmail: {
             name: "Email",
             text: "bla bla bla",
-            img: 'src'
+            img: 'src',
+            email:true,
+            library:false,
+            sifi:false
         },
         cardLibrary: {
             name: "Library",
@@ -68,7 +71,7 @@ export default {
 .wrapper {
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
-    grid-template-rows: 150px 3% 20% 20% 20% 20%;
+    grid-template-rows: 150px 50px 20% 20% 20% 20%;
 }
 .header{
     grid-column: 1/6;

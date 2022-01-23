@@ -17,7 +17,7 @@ const routes = [
     component: Home
   },
   {
-    path: "/mail",
+    path: "/email",
     name: "Mail",
     component: Mail
   },
