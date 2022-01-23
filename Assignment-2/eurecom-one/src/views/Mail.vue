@@ -22,7 +22,7 @@ import Nav from '../components/Nav.vue';
 
 
 export default {
-  name: "About",
+  name: "Mail",
   data(){
 
 
@@ -75,7 +75,7 @@ export default {
 @media all and (min-width: 800px) {
   .mailAbout    { flex: 3 0px; }
   .nav          { order: 1  }
-  .mail-aside      { order: 2; } 
+  .mail-aside   { order: 2; } 
   .mailAbout    { order: 3; }
   .footer       { order: 5; }
 }
@@ -83,6 +83,7 @@ export default {
 body {
   padding: 2em; 
 }
+
 
 </style>
 

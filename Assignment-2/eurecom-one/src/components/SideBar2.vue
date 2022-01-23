@@ -29,32 +29,52 @@
     >
       <ul>
         <li>
-          <p class="title">Title</p>
-          <img
-            src="https://study-eu.s3.amazonaws.com/uploads/image/path/471/wide_fullhd_eurecom-entree-nord-mer-1920x960.jpg"
-          />
-          <p class="link">link</p>
+          <p class="title">Title 1</p>
+          <a
+            href="https://www.eurecom.fr/en/news/wsa-2021-international-workshop-will-be-held-eurecom-november-10-12"
+            target="_blank"
+            class="link"
+          >
+            <iframe
+              width="100%"
+              src="https://www.youtube.com/embed/uIlFcgNijnM"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </a>
         </li>
         <li>
-          <p class="title">Title</p>
-          <img
-            src="https://study-eu.s3.amazonaws.com/uploads/image/path/471/wide_fullhd_eurecom-entree-nord-mer-1920x960.jpg"
-          />
-          <p class="link">link</p>
+          <p class="title">Title 2</p>
+          <a
+            href="https://www.eurecom.fr/en/news/fall-2021-openairinterface-workshop-hands-oai-architects"
+            target="_blank"
+            class="link"
+            ><img
+              src="https://study-eu.s3.amazonaws.com/uploads/image/path/471/wide_fullhd_eurecom-entree-nord-mer-1920x960.jpg"
+          /></a>
         </li>
         <li>
-          <p class="title">Title</p>
-          <img
-            src="https://study-eu.s3.amazonaws.com/uploads/image/path/471/wide_fullhd_eurecom-entree-nord-mer-1920x960.jpg"
-          />
-          <p class="link">link</p>
+          <p class="title">Title 3</p>
+          <iframe
+            width="100%"
+            src="https://www.youtube.com/embed/fuWP3eLudc4"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
         </li>
         <li>
-          <p class="title">Title</p>
-          <img
-            src="https://study-eu.s3.amazonaws.com/uploads/image/path/471/wide_fullhd_eurecom-entree-nord-mer-1920x960.jpg"
-          />
-          <p class="link">link</p>
+           <p class="title">Title 4</p>
+          <a
+            href="https://www.eurecom.fr/en/news/fall-2021-openairinterface-workshop-hands-oai-architects"
+            target="_blank"
+            class="link"
+            ><img
+              src="https://study-eu.s3.amazonaws.com/uploads/image/path/471/wide_fullhd_eurecom-entree-nord-mer-1920x960.jpg"
+          /></a>
         </li>
       </ul>
     </marquee>
@@ -176,8 +196,11 @@ export default {
 
 <style scoped>
 #map {
-      height: 180px;
-      widows: 60%;
-      margin: 10px auto 10px auto;
+  height: 180px;
+  widows: 60%;
+  margin: 10px auto 10px auto;
+}
+p {
+  margin-top: 10px;
 }
 </style>
