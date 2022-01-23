@@ -76,10 +76,11 @@ data(){
     margin-left: 10px;
 }
 .contact p{
-    width: 300px;
+    width: 100%;
     font-family: Avenir, Helvetica, Arial, sans-serif;
     font-size: 0.8em;
     margin-bottom: 20px;
+    margin-right: 10px;
 
 }
 h1{
