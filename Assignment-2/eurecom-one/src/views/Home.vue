@@ -2,19 +2,20 @@
 
 <div class="wrapper">
     <Header /> 
-    
     <Nav />
-        <article class="main">
+
+        <article class="card-email">
+            <CardArticle :class_name="name"/>
+        </article>
+
+        <article class="card-library">
             <CardArticle />
         </article>
 
-        <article class="main">
+        <article class="card-sifi">
             <CardArticle />
         </article>
 
-        <article class="main">
-            <CardArticle />
-        </article>
     <SideBar />
     <SideBar2 />
     <Footer />
@@ -33,13 +34,21 @@ import CardArticle from '../components/CardArticle.vue';
 export default {
   name: "Home",
   data(){
-
-
     var obj = JSON.parse(sessionStorage.getItem("account"));
     console.log(obj)
 
     return {
-      
+        cardEmail: {
+            name: "Email",
+            text: "bla bla bla",
+            img: 'src'
+        },
+        cardLibrary: {
+            name: "Library",
+            text: "bla bla bla",
+            img: 'src'
+        },
+
     }
 
   },
@@ -75,6 +84,23 @@ export default {
     grid-column: 2/5;
     grid-row: 3/7;
 }
+.card-email{
+    text-align: center;
+    grid-column: 2/5;
+    grid-row: 3;
+}
+.card-library{
+    text-align: center;
+    grid-column: 2/5;
+    grid-row: 4;
+}
+
+.card-sifi{
+    text-align: center;
+    grid-column: 2/5;
+    grid-row: 5;
+}
+
 
 .aside-1 {
     background: rgba(134, 134, 134, 0.151);
@@ -94,16 +120,11 @@ export default {
 
 
 @media all and (min-width: 600px) {
-  .aside { flex: 1 0 0; }
+
 }
 
 @media all and (min-width: 800px) {
-  .main    { flex: 3 0px; }
-  .nav     { order: 1  }
-  .aside-1 { order: 2; } 
-  .main    { order: 3; }
-  .aside-2 { order: 4; }
-  .footer  { order: 5; }
+  
 }
 
 body {
