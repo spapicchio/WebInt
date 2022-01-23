@@ -12,6 +12,8 @@
     <!-- inside there are the emails -->
     <div class="card-email" v-if="!readEmail">
         <h1 class="title is-3">{{nameCard}}</h1>
+        <input v-model="input_text" class="input is-hovered" type="text" placeholder="Search Emails" >
+
         <table v-if="!loading">
         <tr>
             <th>Email</th>
@@ -19,7 +21,7 @@
             <th>Object</th>
             <th>See Email</th>
         </tr>
-        <tr v-for="email in correctId" :key="email.id">
+        <tr v-for="email in emailFiltered()" :key="email.id">
             <td>{{ email.email }}</td>
             <td>{{ email.registered }}</td>
             <td>{{ email.object }}</td>
@@ -83,9 +85,25 @@ export default {
             deleteId: deleteID,
             correctId:[],
             email: null,
+            input_text: "",
         }
     },
     methods:{
+        emailFiltered(){
+
+            return this.correctId.filter(email => {
+                if (JSON.stringify(email.email).toLowerCase().startsWith('"'+this.input_text.trim().toLowerCase()))
+                    return true
+                if (JSON.stringify(email.registered).toLowerCase().startsWith('"'+this.input_text.trim().toLowerCase()))
+                    return true
+                if (JSON.stringify(email.object).toLowerCase().startsWith('"'+this.input_text.trim().toLowerCase()))
+                    return true
+                if(this.input_text == "")
+                    return true
+                
+                return false
+            });
+        },
         updateEmails(){
             this.correctId = this.emails.filter((email) => {
                 return !(this.spamId.includes(email._id) || this.deleteId.includes(email._id))
@@ -126,16 +144,20 @@ export default {
         emailOption(name){
             if (name == 'Inbox'){
                 console.log('Inbox');
+                this.nameCard="Inbox"
                 this.updateEmails();
             }
 
             if (name == 'Spam'){
+                this.nameCard = "Spam"
                 console.log(this.spamId);
                 this.correctId = this.emails.filter((email) => {
                 return this.spamId.includes(email._id)
+                
             })
             }      
             if (name == 'Deleted'){
+                this.nameCard = "Deleted"
                 console.log('Deleted');
                 this.correctId = this.emails.filter((email) => {
                     return this.deleteId.includes(email._id)
@@ -181,7 +203,9 @@ export default {
 </script>
 
 <style scoped>
-
+input{
+    width: 80%;    
+}
 .container{
     display: inline-block;
     background-color: white;
@@ -238,7 +262,8 @@ table{
     max-width: 80%;
     height:500px;
     display:block;
-    margin-left: 15%;
+    margin-top: 10px;
+    margin-left: 10%;
     text-align: left;
   
     border-collapse: separate;
