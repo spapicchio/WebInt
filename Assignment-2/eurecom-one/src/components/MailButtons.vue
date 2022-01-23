@@ -1,12 +1,23 @@
 <template>
 <div class="btn-group">
-<button @click="onClick">All Emails</button>
-  <button @click="onClick">Create new Email</button>
+  <button class="all_mail" @click="onClick1">All Emails</button>
+  <button class="new_mail" @click="onClick2">Create new Email</button>
 </div>
 </template>
 
 <script>
-
+export default {
+    props: {
+        onClick2: {
+            type: Function,
+            required: true
+        },
+        onClick1: {
+          type: Function,
+          required: true
+        }
+    }
+}
 </script>
 
 <style scoped>

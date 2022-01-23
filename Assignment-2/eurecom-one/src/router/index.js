@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import LogIn from "../views/LogIn.vue";
 import Mail from "../views/Mail.vue";
 import About from "../views/About.vue";
+import SentMail from "../views/SentMail.vue";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/about",
     name: "About",
     component: About
+  },
+  {
+    path: "/sentMail",
+    name: "SentMail",
+    component: SentMail
   }
 ];
 

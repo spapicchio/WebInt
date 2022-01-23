@@ -5,39 +5,39 @@
         <tbody>
           <tr>
             <td>Google</td>
-            <td>9518</td>
-            <td>6369</td>
-            <td>01:32:50</td>
+            <td>Title</td>
+            <td>Date</td>
+            <td>Text preview</td>
           </tr>
           <tr>
             <td>Twitter</td>
-            <td>7326</td>
-            <td>10437</td>
-            <td>00:51:22</td>
+            <td>Title</td>
+            <td>Date</td>
+             <td>Text preview</td>
           </tr>
           <tr>
             <td>Amazon</td>
-            <td>4162</td>
-            <td>5327</td>
-            <td>00:24:34</td>
+            <td>Title</td>
+            <td>Date</td>
+             <td>Text preview</td>
           </tr>
           <tr>
             <td>LinkedIn</td>
-            <td>3654</td>
-            <td>2961</td>
-            <td>00:12:10</td>
+            <td>Title</td>
+            <td>Date</td>
+             <td>Text preview</td>
           </tr>
           <tr>
             <td>CodePen</td>
-            <td>2002</td>
-            <td>4135</td>
-            <td>00:46:19</td>
+            <td>Title</td>
+            <td>Date</td>
+             <td>Text preview</td>
           </tr>
           <tr>
             <td>GitHub</td>
-            <td>4623</td>
-            <td>3486</td>
-            <td>00:31:52</td>
+            <td>Title</td>
+            <td>Date</td>
+             <td>Text preview</td>
           </tr>
         </tbody>
       </table>
@@ -45,13 +45,9 @@
     <div class="current_mail">
       <p align="center">
         <iframe
-          width="560"
+          width="100%"
           height="315"
-          src="https://www.youtube.com/embed/bvWRMAU6V-c"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+          src="/SentMail"
         ></iframe>
       </p>
     </div>
@@ -175,10 +171,10 @@ h2 a {
 }
 
 .current_mail {
-  margin: auto;
+  margin:auto;
+  margin-top: 20px;
   width: 90%;
   border: 3px solid green;
-  padding: 10px;
 }
 
 div.scroll {
