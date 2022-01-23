@@ -10,27 +10,43 @@
     </div>
 
     <!-- inside there are the emails -->
-    <div class="card-email">
+    <div class="card-email" v-if="!readEmail">
         <h1 class="title is-3">{{nameCard}}</h1>
         <table v-if="!loading">
         <tr>
             <th>Email</th>
-            <th>Name</th>
+            <th>Date</th>
             <th>Object</th>
             <th>See Email</th>
         </tr>
-        <tr v-for="email in emails" :key="email.id">
+        <tr v-for="email in correctId" :key="email.id">
             <td>{{ email.email }}</td>
-            <td>{{ email.name }}</td>
+            <td>{{ email.registered }}</td>
             <td>{{ email.object }}</td>
-            <td><button class="button"> Open </button></td>
+            <td><button class="button" @click="openEmail(JSON.stringify(email))"> Open </button></td>
         </tr>
         </table>
     
     </div>
 
     <!-- this is used to send a new email -->
-    <div class="card-new-email"></div>
+    <div class="card-new-email" v-if="readEmail">
+        <div class="header-mail">
+            <p><b>From:</b> {{nameSent}}</p>
+            <p><b>Date:</b> {{dateSent}}</p>
+            <p><b>Object:</b> {{objectSent}}</p>
+            <div class="button-header">
+                <button class="button is-success" @click="headerButton('reply')">Reply</button>
+                <button class="button" @click="headerButton('spam')">Spam</button>
+                <button class="button is-danger" @click="headerButton('delete')">Delete</button>
+                
+            </div>
+        </div>
+        <div class="text-email">
+            <p>{{textSent}}</p>
+        </div>
+
+    </div>
 
     <Footer />
 </div>
@@ -43,25 +59,74 @@ import Footer from '../components/Footer.vue';
 import Nav from '../components/Nav.vue';
 import { getFirestore, doc, getDoc } from "firebase/firestore"
 
-
-
-
 export default {
     name: "Mail",
     data(){
         this.updateData();
         var obj = JSON.parse(sessionStorage.getItem("account"));
         console.log(obj)
-
+        
         return {
             nameCard: "Inbox",
             loading: false,
             emails: [],
+            readEmail: false,
+            nameSent: "",
+            dateSent: "",
+            objectSent: "",
+            textSent:"",
+            spamId: [],
+            deleteId: [],
+            correctId:[],
+            email: null,
         }
     },
     methods:{
+        updateEmails(){
+            this.correctId = this.emails.filter((email) => {
+                return !(this.spamId.includes(email._id) || this.deleteId.includes(email._id))
+            })
+        },
+        headerButton(name){
+            console.log('clicked')
+            if(name == 'reply'){
+                console.log('reply')
+                
+            }
+            if(name == 'spam'){
+                this.spamId.push(this.email._id)
+                this.updateEmails();
+                this.readEmail = false;
+                
+
+            }
+            if (name == 'delete'){
+                this.deleteId.push(this.email._id)
+                this.updateEmails();
+                this.readEmail = false;
+                
+            }   
+        },
+        openEmail(email){
+            email = JSON.parse(email)
+            this.nameSent = email.name
+            this.objectSent = email.object
+            this.dateSent = email.registered
+            this.textSent = email.about
+            this.email = email
+            this.readEmail = true
+
+        },
         emailOption(name){
+            if (name == 'inbox'){
+                console.log('inbox');
+                this.updateEmails();
+            }
+            if (name == '')
             this.nameCard = name;
+            this.readEmail = false
+
+
         },
         async updateData(){
             // firestore instance
@@ -75,6 +140,12 @@ export default {
 
             if (docSnap.exists()) {
             this.emails = docSnap.data().inbox;
+            console.log(docSnap.data().inbox)
+
+            this.correctId = this.emails.filter((email) => {
+                return !(this.spamId.includes(email._id) || this.deleteId.includes(email._id))
+            })
+            
             } else {
             // doc.data() will be undefined in this case
             console.log("No such document!");
@@ -103,6 +174,39 @@ export default {
     margin: 5px 5px 10px 10px;
 }
 
+
+.header-mail{
+     border: 1px solid;
+     text-align: left;
+     max-width: 50%;
+     margin: 50px auto 0 auto;
+     background-color: #d3d3d3;
+     text-size-adjust: 2em;
+     font-size: 25px;
+     padding: 10px;
+}
+.header-mail p,
+.text-mail p{
+    margin: 15px 15px 15px 15px;
+    margin-left:20px;
+}
+.text-email{
+    padding: 10px;
+    border: 1px solid;
+    text-align: left;   
+    max-width: 50%;
+    margin: 0 auto 0 auto;
+    background-color: #d3d3d3;
+    font-size: 20px
+}
+
+.button-header{
+    margin:0 5px 0 5px;
+}
+.button-header button{
+    margin:0 5px 0 5px;
+}
+
 .email-option{
     border-bottom: 1px solid;
 
@@ -114,18 +218,28 @@ export default {
 }
 
 table{
-    table-layout: fixed;
-    max-width: 100%;
-    margin: 0% auto 0% auto;
+    overflow-y:scroll;
+    max-width: 80%;
+    height:500px;
+    display:block;
+    margin-left: 15%;
     text-align: left;
+  
     border-collapse: separate;
     border-spacing: 0px 7px;
+}
+table tr{
+    margin: 0 auto 0 50px;
 }
 
 table td,
 table th{
     padding:0 15px 0 15px;
     word-wrap: break-word;
+    vertical-align: middle;
+}
+table button{
+    margin-bottom: 4px;
 }
 
 table th{
@@ -136,6 +250,9 @@ table td{
     border-bottom: 0.1pt solid gray;
 }
 
+table th{
+    width:30%;
+}
 .wrapper {
     display: grid;
     grid-template-columns: 20% 20% 20% 20% 20%;
