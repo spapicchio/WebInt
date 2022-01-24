@@ -1,35 +1,44 @@
 <template>
   <footer class="footer">
     <div class="footer-left">
-      <h3>
+      
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Eurecom.svg/2560px-Eurecom.svg.png"
-          width="240px"
         >
-      </h3>
+      
 
       <p class="footer-links">
-        <a href="/home">Home</a>
+        <a @click="iconClick('home')">Home</a>
         ·
         <a href="https://www.facebook.com/eurecomCommunication/" target="_blank">Facebook</a>
         ·
         <a href="https://www.linkedin.com/school/eurecom/" target="_blank">LinkedIn</a>
         ·
-        <a href="/about">About</a>
+        <a @click="iconClick('about')">About</a>
       </p>
     </div>
 
-    <div class="footer-right">
-      <p>Send us a Ticket</p>
-
-      <form action="#" method="post">
-        <input type="text" name="email" placeholder="Email" />
-        <textarea name="message" placeholder="Message"></textarea>
-        <button>Send</button>
-      </form>
-    </div>
   </footer>
 </template>
+
+<script>
+export default {
+    name: "Nav",
+
+    data() {
+        return
+    },
+
+    methods: {
+        iconClick(location) {
+        this.$router.push("/" + location);
+        },
+
+    }
+};
+</script>
+
+
 
 <style scoped>
 .footer {
@@ -42,7 +51,6 @@
   text-align: left;
   padding: 50px 60px 40px;
 }
-
 section {
   width: 100%;
   display: inline-block;
@@ -57,23 +65,17 @@ section {
 /* Footer left */
 
 .footer .footer-left {
-  float: left;
+    max-width: 300px;
+    margin:0 auto 0 auto;
 }
+img{
+     max-width: 256px;
+     margin: 0 auto 0 auto;
+ }
 
-/* Logo */
-
-.footer h3 {
-  font: normal 0px "Roboto", cursive;
-}
-
-.footer h3 span {
-  color: #5383d3;
-}
-
-/* Footer links */
 
 .footer .footer-links {
-  color: #ffffff;
+  color: #b1aeae;
   margin: 0 0 10px;
   padding: 0;
 }

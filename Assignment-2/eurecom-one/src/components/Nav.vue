@@ -6,15 +6,8 @@
 
     <div class="nav-right">
       <div class="user">
-        <a href="#search"
-          ><h1>Hello {{ form.completName }}</h1></a
-        >
-        <img
-          id="user-image"
-          v-if="form.seen"
-          :src="form.picture"
-          :alt="`${form.firstName} ${form.lastName}`"
-        />
+        <h1 class="title is-5">Hello {{ form.completName }}</h1>
+        <button class="button is-danger" @click="logoutClick"> Log-Out</button>
       </div>
     </div>
   </div>
@@ -32,8 +25,6 @@ export default {
       form: obj,
     };
   },
-  components: {},
-  props: {},
   methods: {
     iconClick(location) {
       this.$router.push("/" + location);
@@ -41,7 +32,8 @@ export default {
 
     logoutClick() {
       console.log("LogOut clicked");
-      this.$router.push("login");
+      sessionStorage.clear();
+      this.$router.push("/");
     },
   },
 };
@@ -94,9 +86,12 @@ export default {
   height: 8px;
 }
 .user h1 {
-  float: right;
-  margin-left: auto;
-  margin-bottom: 5px;
+    margin: 10px 10px;
+    float: left;
+}
+.user button{
+    margin-right: 10px;
+    margin-top: 4px;
 }
 
 h1 {
@@ -109,9 +104,6 @@ h1 {
 
 /*Hide image and name*/
 @media screen and (max-width: 800px) {
-  .nav-right #user-image {
-    display: none;
-  }
 
   .user h1 {
     font-size: 0px;

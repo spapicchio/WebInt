@@ -5,12 +5,15 @@
     <!-- inside there are the otpions for the email -->
     <div class="aside-1 container">
         <div class="email-option"><button class="button" @click="emailOption('Inbox')"> Inbox</button></div>
+        <div class="email-option"><button class="button" @click="emailOption('Sent')"> Sent</button></div>
         <div class="email-option"><button class="button" @click="emailOption('Deleted')"> Deleted</button></div>
         <div class="email-option"><button class="button" @click="emailOption('Spam')"> Spam</button></div>
+
+    
     </div>
 
     <!-- inside there are the emails -->
-    <div class="card-email" v-if="!readEmail">
+    <div class="card-email" v-if="!readEmail && !newEmail">
         <h1 class="title is-3">{{nameCard}}</h1>
         <input v-model="input_text" class="input is-hovered" type="text" placeholder="Search Emails" >
 
@@ -31,8 +34,8 @@
     
     </div>
 
-    <!-- this is used to send a new email -->
-    <div class="card-new-email" v-if="readEmail">
+    <!-- this is used to read the email -->
+    <div class="card-new-email" v-if="readEmail && !newEmail">
         <div class="header-mail">
             <p><b>From:</b> {{nameSent}}</p>
             <p><b>Date:</b> {{dateSent}}</p>
@@ -41,15 +44,108 @@
                 <button class="button is-success" @click="headerButton('reply')">Reply</button>
                 <button class="button" @click="headerButton('spam')">Spam</button>
                 <button class="button is-danger" @click="headerButton('delete')">Delete</button>
-                
             </div>
         </div>
         <div class="text-email">
             <p>{{textSent}}</p>
         </div>
-
     </div>
 
+    <!-- newEmail -->
+    <div class=contact-form v-if=newEmail>
+        <div class=new-email>
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">From</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    <input class="input" type="text" placeholder="Name" :value="user.completName" readonly>
+                    <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                    </span>
+                </p>
+                </div>
+                <div class="field">
+                <p class="control is-expanded has-icons-left has-icons-right">
+                    <input class="input is-success" type="email" placeholder="Email" :value="user.email" readonly>
+                    <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                    </span>
+                </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field-label"></div>
+        </div>
+        
+        <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">To</label>
+        </div>
+        <div class="field-body">
+            <div class="field has-addons">
+                <p class="control">
+                    <input class="input toEmail" type="text" placeholder="new email">
+                </p>
+                <p class="control buttonToEmail">
+                    <a class="button is-static">
+                    @eurecom.fr
+                    </a>
+                </p>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Subject</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="text" placeholder="Subject" v-model="objectSent">
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Text</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+            <div class="control">
+                <textarea class="textarea" placeholder="Insert Here your email" v-model="textSent"></textarea>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="field is-horizontal">
+        <div class="field-label">
+            <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+            <div class="field">
+            <div class="control">
+                <button class="button is-primary" @click="newEmailClick()">
+                Send Email
+                </button>
+            </div>
+            </div>
+        </div>
+        </div>
+        </div>
+    </div>
     <Footer />
 </div>
 </template>
@@ -64,28 +160,41 @@ import { getFirestore, doc, getDoc } from "firebase/firestore"
 export default {
     name: "Mail",
     data(){
+
         let spamId = JSON.parse(sessionStorage.getItem("spam"))
         if (spamId == null) spamId = []
+
         let deleteID = JSON.parse(sessionStorage.getItem("delete"))
         if (deleteID == null) deleteID = []
+
+        let sentId = JSON.parse(sessionStorage.getItem("sent"))
+        if (sentId == null) sentId = []
+
         this.updateData();
+        
         var obj = JSON.parse(sessionStorage.getItem("account"));
         console.log(obj)
         
         return {
+            user: obj,
             nameCard: "Inbox",
-            loading: false,
-            emails: [],
-            readEmail: false,
-            nameSent: "",
-            dateSent: "",
-            objectSent: "",
-            textSent:"",
-            spamId: spamId,
-            deleteId: deleteID,
-            correctId:[],
-            email: null,
-            input_text: "",
+            emails: [], // contains the emails fetched from firebase
+            
+            nameSent: "", //the name used inside the reading email object
+            dateSent: "", //used inside reading email object
+            objectSent: "", //used inside reading email object
+            textSent:"", //the text sent/read
+
+            sentId: sentId, //used to store all the sent email
+            spamId: spamId, //used to store the emails in the spam
+            deleteId: deleteID,//used to store the delete emails in the spam
+            correctId:[],//the correct id to display (filtered)
+            input_text: "", //used to filter the emails
+
+            newEmail: false,//flag to trigger the new email
+            readEmail: false,//flag to triggere read the email
+            loading: true, //flag to display the table only after have loaded from firebase
+
         }
     },
     methods:{
@@ -110,9 +219,9 @@ export default {
             })
         },
         headerButton(name){
-            console.log('clicked')
             if(name == 'reply'){
                 console.log('reply')
+                this.newEmail = true;
                 
             }
             if(name == 'spam'){
@@ -128,12 +237,28 @@ export default {
                 sessionStorage.setItem("delete", JSON.stringify(this.deleteId))
                 this.updateEmails();
                 this.readEmail = false;
-                
-            }   
+            }  
+        },
+        newEmailClick(){
+            var today = new Date();
+
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            let newObj = {
+                email: this.user.email,
+                registered: date,
+                object: this.objectSent,
+                about: this.textSent
+            }
+            console.log(newObj)
+            this.sentId.push(newObj)
+            sessionStorage.setItem('sent', JSON.stringify(this.sentId))
+            this.loading=false
+            this.newEmail=false
+            this.readEmail=false
         },
         openEmail(email){
             email = JSON.parse(email)
-            this.nameSent = email.name
+            this.nameSent = email.email
             this.objectSent = email.object
             this.dateSent = email.registered
             this.textSent = email.about
@@ -163,6 +288,16 @@ export default {
                     return this.deleteId.includes(email._id)
                 })
             }
+            if (name == 'Sent'){
+                this.nameCard = "Sent"
+                console.log('Sent');
+                this.correctId = this.sentId
+            }
+
+            this.newEmail=false;
+            this.readEmail=false;
+            this.loading=false
+
 
 
         },
@@ -183,6 +318,8 @@ export default {
             this.correctId = this.emails.filter((email) => {
                 return !(this.spamId.includes(email._id) || this.deleteId.includes(email._id))
             })
+
+            this.loading=false
             
             } else {
             // doc.data() will be undefined in this case
@@ -213,7 +350,20 @@ input{
     box-shadow: 0px 5px 10px 0px #888888;
     margin: 5px 5px 10px 10px;
 }
+.new-email{
+    background-color: #c2c2c2;
+    width: 70%;
+    margin: 10% auto 0px auto;
+    padding: 50px 70px 50px 0;
+    border: 1px solid;
+}
 
+.toEmail{
+    margin-left: 20px;
+}
+.buttonToEmail{
+    float: left !important;
+}
 
 .header-mail{
      border: 1px solid;
@@ -314,7 +464,8 @@ table th{
     grid-row: 3/7;
 }
 .card-email,
-.card-new-email{
+.card-new-email, 
+.contact-form{
     text-align: center;
     grid-column: 2/6;
     grid-row: 3/7;
