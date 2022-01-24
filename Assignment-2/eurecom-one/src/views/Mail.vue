@@ -5,8 +5,11 @@
     <!-- inside there are the otpions for the email -->
     <div class="aside-1 container">
         <div class="email-option"><button class="button" @click="emailOption('Inbox')"> Inbox</button></div>
+        <div class="email-option"><button class="button" @click="emailOption('Sent')"> Sent</button></div>
         <div class="email-option"><button class="button" @click="emailOption('Deleted')"> Deleted</button></div>
         <div class="email-option"><button class="button" @click="emailOption('Spam')"> Spam</button></div>
+
+    
     </div>
 
     <!-- inside there are the emails -->
@@ -48,21 +51,81 @@
         </div>
     </div>
 
-    <!-- this is used to send a new Email -->
-    <div class="card-new-email" v-if="newEmail">
-        <div class="header-mail">
-            <p><b>From:</b> {{nameSent}}</p>
-            <p><b>Date:</b> {{dateSent}}</p>
-            <p><b>Object:</b> {{objectSent}}</p>
-            <div class="button-header">
-                <button class="button is-success" @click="headerButton('sent')">Send Email</button>
+    <!-- newEmail -->
+    <div class=contact-form v-if=newEmail>
+
+        <div class="field is-horizontal">
+            <div class="field-label is-normal">
+                <label class="label">From</label>
+            </div>
+            <div class="field-body">
+                <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    <input class="input" type="text" placeholder="Name" :value="user.completName" readonly>
+                    <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                    </span>
+                </p>
+                </div>
+                <div class="field">
+                <p class="control is-expanded has-icons-left has-icons-right">
+                    <input class="input is-success" type="email" placeholder="Email" :value="user.email" readonly>
+                    <span class="icon is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                    </span>
+                    <span class="icon is-small is-right">
+                    <i class="fas fa-check"></i>
+                    </span>
+                </p>
+                </div>
             </div>
         </div>
-        <div class="text-email">
-            <p>{{textSent}}</p>
+
+        <div class="field is-horizontal">
+            <div class="field-label"></div>
+        </div>
+
+        <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Subject</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="text" placeholder="Subject" v-model="objectSent">
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Text</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+            <div class="control">
+                <textarea class="textarea" placeholder="Insert Here your email" v-model="textSent"></textarea>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="field is-horizontal">
+        <div class="field-label">
+            <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+            <div class="field">
+            <div class="control">
+                <button class="button is-primary" @click="newEmailClick()">
+                Send Email
+                </button>
+            </div>
+            </div>
+        </div>
         </div>
     </div>
-
     <Footer />
 </div>
 </template>
@@ -84,26 +147,34 @@ export default {
         let deleteID = JSON.parse(sessionStorage.getItem("delete"))
         if (deleteID == null) deleteID = []
 
+        let sentId = JSON.parse(sessionStorage.getItem("sent"))
+        if (sentId == null) sentId = []
+
         this.updateData();
         
         var obj = JSON.parse(sessionStorage.getItem("account"));
         console.log(obj)
         
         return {
+            user: obj,
             nameCard: "Inbox",
-            loading: false,
-            emails: [],
-            readEmail: false,
-            nameSent: "",
-            dateSent: "",
-            objectSent: "",
-            textSent:"",
-            spamId: spamId,
-            deleteId: deleteID,
-            correctId:[],
-            email: null,
-            input_text: "",
-            newEmail: false,
+            emails: [], // contains the emails fetched from firebase
+            
+            nameSent: "", //the name used inside the reading email object
+            dateSent: "", //used inside reading email object
+            objectSent: "", //used inside reading email object
+            textSent:"", //the text sent/read
+
+            sentId: sentId, //used to store all the sent email
+            spamId: spamId, //used to store the emails in the spam
+            deleteId: deleteID,//used to store the delete emails in the spam
+            correctId:[],//the correct id to display (filtered)
+            input_text: "", //used to filter the emails
+
+            newEmail: false,//flag to trigger the new email
+            readEmail: false,//flag to triggere read the email
+            loading: true, //flag to display the table only after have loaded from firebase
+
         }
     },
     methods:{
@@ -130,8 +201,6 @@ export default {
         headerButton(name){
             if(name == 'reply'){
                 console.log('reply')
-                var obj = JSON.parse(sessionStorage.getItem("account"));
-                console.log(obj)
                 this.newEmail = true;
                 
             }
@@ -149,13 +218,23 @@ export default {
                 this.updateEmails();
                 this.readEmail = false;
             }  
-            if (name == 'sent'){
-                
-                console.log(this.loading, "dhehehehehe")
-                this.newEmail = false;
-                this.readEmail = false;
-                console.log(this.newEmail, "dhehehehehe")
+        },
+        newEmailClick(){
+            var today = new Date();
+
+            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+            let newObj = {
+                email: this.user.email,
+                registered: date,
+                object: this.objectSent,
+                about: this.textSent
             }
+            console.log(newObj)
+            this.sentId.push(newObj)
+            sessionStorage.setItem('sent', JSON.stringify(this.sentId))
+            this.loading=false
+            this.newEmail=false
+            this.readEmail=false
         },
         openEmail(email){
             email = JSON.parse(email)
@@ -189,6 +268,11 @@ export default {
                     return this.deleteId.includes(email._id)
                 })
             }
+            if (name == 'Sent'){
+                this.nameCard = "Sent"
+                console.log('Sent');
+                this.correctId = this.sentId
+            }
 
 
         },
@@ -209,6 +293,8 @@ export default {
             this.correctId = this.emails.filter((email) => {
                 return !(this.spamId.includes(email._id) || this.deleteId.includes(email._id))
             })
+
+            this.loading=false
             
             } else {
             // doc.data() will be undefined in this case
@@ -240,6 +326,9 @@ input{
     margin: 5px 5px 10px 10px;
 }
 
+.contact-form{
+    padding: 10% 15%;
+}
 
 .header-mail{
      border: 1px solid;
@@ -340,7 +429,8 @@ table th{
     grid-row: 3/7;
 }
 .card-email,
-.card-new-email{
+.card-new-email, 
+.contact-form{
     text-align: center;
     grid-column: 2/6;
     grid-row: 3/7;
