@@ -26,7 +26,7 @@
             <p class="title">Direction</p>
             <p>Some text that describes me</p>
             <p>david@example.com</p>
-            <p><button class="button">Contact</button></p>
+           
           </div>
         </div>
       </div>
@@ -43,7 +43,7 @@
             <p class="title">Communication</p>
             <p>Some text that describes me</p>
             <p>laurence@example.com</p>
-            <p><button class="button">Contact</button></p>
+           
           </div>
         </div>
       </div>
@@ -60,7 +60,7 @@
             <p class="title">WebInt Professor</p>
             <p>Some text that describes me</p>
             <p>raphaël@example.com</p>
-            <p><button class="button">Contact</button></p>
+            
           </div>
         </div>
       </div>
