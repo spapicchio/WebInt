@@ -9,28 +9,28 @@
       My Notifications:
     </h1>
     <div class="notice info">
-      <h2>Notification Title</h2>
+      <h2>Malis Presentation</h2>
       <p>
         This to inform you that next week MALIS presentation will be held on Friday 30/01/2022 in Amphi at 15.30pm. 
       </p>
     </div>
 
     <div class="notice success">
-      <h2>Notification Title</h2>
+      <h2>Exam Results</h2>
       <p>
         You passed the WebInt exam! Congratulations!
       </p>
     </div>
 
     <div class="notice warning">
-      <h2>Notification Title</h2>
+      <h2>Message from the secretary</h2>
       <p>
         You have to see Mrs. LE STIR Gwenaelle to bring her some important document!
       </p>
     </div>
 
     <div class="notice error">
-      <h2>Notification Title</h2>
+      <h2>Missed Deadline</h2>
       <p>
         Ops! You miss the OPTIM Assignment 1 Deadline!
       </p>
