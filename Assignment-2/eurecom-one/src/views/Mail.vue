@@ -53,7 +53,7 @@
 
     <!-- newEmail -->
     <div class=contact-form v-if=newEmail>
-
+        <div class=new-email>
         <div class="field is-horizontal">
             <div class="field-label is-normal">
                 <label class="label">From</label>
@@ -84,6 +84,25 @@
         <div class="field is-horizontal">
             <div class="field-label"></div>
         </div>
+        
+        <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">To</label>
+        </div>
+        <div class="field-body">
+            <div class="field has-addons">
+                <p class="control">
+                    <input class="input toEmail" type="text" placeholder="new email">
+                </p>
+                <p class="control buttonToEmail">
+                    <a class="button is-static">
+                    @eurecom.fr
+                    </a>
+                </p>
+            </div>
+        </div>
+        </div>
+
 
         <div class="field is-horizontal">
         <div class="field-label is-normal">
@@ -123,6 +142,7 @@
                 </button>
             </div>
             </div>
+        </div>
         </div>
         </div>
     </div>
@@ -274,6 +294,11 @@ export default {
                 this.correctId = this.sentId
             }
 
+            this.newEmail=false;
+            this.readEmail=false;
+            this.loading=false
+
+
 
         },
         async updateData(){
@@ -325,9 +350,19 @@ input{
     box-shadow: 0px 5px 10px 0px #888888;
     margin: 5px 5px 10px 10px;
 }
+.new-email{
+    background-color: #c2c2c2;
+    width: 70%;
+    margin: 10% auto 0px auto;
+    padding: 50px 70px 50px 0;
+    border: 1px solid;
+}
 
-.contact-form{
-    padding: 10% 15%;
+.toEmail{
+    margin-left: 20px;
+}
+.buttonToEmail{
+    float: left !important;
 }
 
 .header-mail{
