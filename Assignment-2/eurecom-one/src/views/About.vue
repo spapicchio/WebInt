@@ -51,44 +51,50 @@ export default {
 
 <style scoped>
 .wrapper {
-  display: flex;  
-  flex-flow: row wrap;
-  text-align: center; 
+  display: grid;
+  grid-template-columns: 20% 20% 20% 20% 20%;
+  grid-template-rows: 150px 50px 20% 20% 20% 20%;
 }
-
-
-.wrapper > * {
-  padding: 10px;
-  flex: 1 100%;
+.header {
+  grid-column: 1/6;
+  grid-row-start: 1;
+}
+.nav {
+  grid-row-start: 2;
+  grid-column: 1/6;
 }
 .mainAbout {
-  text-align: left;
-  background: rgba(0, 0, 0, 0.151);
+  text-align: center;
+  background: rgba(218, 218, 218, 0.151);
+  grid-column: 2/5;
+  grid-row: 3/7;
 }
+
 
 .aside-1 {
   background: rgba(134, 134, 134, 0.151);
+  grid-column: 1;
+  grid-row: 3/7;
 }
 
 .aside-2 {
   background: rgba(134, 134, 134, 0.151);
+  grid-column: 5;
+  grid-row: 3/7;
+}
+.footer {
+  grid-row: 7;
+  grid-column: 1/6;
 }
 
 @media all and (min-width: 600px) {
-  .aside { flex: 1 0 0; }
 }
 
 @media all and (min-width: 800px) {
-  .mainAbout    { flex: 3 0px; }
-  .nav     { order: 1  }
-  .aside-1 { order: 2; } 
-  .mainAbout    { order: 3; }
-  .aside-2 { order: 4; }
-  .footer  { order: 5; }
 }
 
-body {
-  padding: 2em; 
-}
+
+
+
 
 </style>
