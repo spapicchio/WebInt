@@ -10,7 +10,7 @@
     </div>
 
     <!-- inside there are the emails -->
-    <div class="card-email" v-if="!readEmail">
+    <div class="card-email" v-if="!readEmail && !newEmail">
         <h1 class="title is-3">{{nameCard}}</h1>
         <input v-model="input_text" class="input is-hovered" type="text" placeholder="Search Emails" >
 
@@ -31,8 +31,8 @@
     
     </div>
 
-    <!-- this is used to send a new email -->
-    <div class="card-new-email" v-if="readEmail">
+    <!-- this is used to read the email -->
+    <div class="card-new-email" v-if="readEmail && !newEmail">
         <div class="header-mail">
             <p><b>From:</b> {{nameSent}}</p>
             <p><b>Date:</b> {{dateSent}}</p>
@@ -41,13 +41,26 @@
                 <button class="button is-success" @click="headerButton('reply')">Reply</button>
                 <button class="button" @click="headerButton('spam')">Spam</button>
                 <button class="button is-danger" @click="headerButton('delete')">Delete</button>
-                
             </div>
         </div>
         <div class="text-email">
             <p>{{textSent}}</p>
         </div>
+    </div>
 
+    <!-- this is used to send a new Email -->
+    <div class="card-new-email" v-if="newEmail">
+        <div class="header-mail">
+            <p><b>From:</b> {{nameSent}}</p>
+            <p><b>Date:</b> {{dateSent}}</p>
+            <p><b>Object:</b> {{objectSent}}</p>
+            <div class="button-header">
+                <button class="button is-success" @click="headerButton('sent')">Send Email</button>
+            </div>
+        </div>
+        <div class="text-email">
+            <p>{{textSent}}</p>
+        </div>
     </div>
 
     <Footer />
@@ -64,11 +77,15 @@ import { getFirestore, doc, getDoc } from "firebase/firestore"
 export default {
     name: "Mail",
     data(){
+
         let spamId = JSON.parse(sessionStorage.getItem("spam"))
         if (spamId == null) spamId = []
+
         let deleteID = JSON.parse(sessionStorage.getItem("delete"))
         if (deleteID == null) deleteID = []
+
         this.updateData();
+        
         var obj = JSON.parse(sessionStorage.getItem("account"));
         console.log(obj)
         
@@ -86,6 +103,7 @@ export default {
             correctId:[],
             email: null,
             input_text: "",
+            newEmail: false,
         }
     },
     methods:{
@@ -110,9 +128,11 @@ export default {
             })
         },
         headerButton(name){
-            console.log('clicked')
             if(name == 'reply'){
                 console.log('reply')
+                var obj = JSON.parse(sessionStorage.getItem("account"));
+                console.log(obj)
+                this.newEmail = true;
                 
             }
             if(name == 'spam'){
@@ -128,12 +148,18 @@ export default {
                 sessionStorage.setItem("delete", JSON.stringify(this.deleteId))
                 this.updateEmails();
                 this.readEmail = false;
+            }  
+            if (name == 'sent'){
                 
-            }   
+                console.log(this.loading, "dhehehehehe")
+                this.newEmail = false;
+                this.readEmail = false;
+                console.log(this.newEmail, "dhehehehehe")
+            }
         },
         openEmail(email){
             email = JSON.parse(email)
-            this.nameSent = email.name
+            this.nameSent = email.email
             this.objectSent = email.object
             this.dateSent = email.registered
             this.textSent = email.about
