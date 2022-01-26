@@ -1,5 +1,7 @@
 <template>
 <div class=container>
+	<div id="sidebar" class="sidebar">
+		<a href="javascript:void(0)" class="closebtn" v-on:click="closeNav()">&times;</a>
         <img
         id=user-image
         :src="picture"
@@ -27,7 +29,7 @@
             <b>Applyed:</b> 2021/2023 <br>
             </p>
         </div>
-
+	</div>
 </div>
 
 </template>
@@ -52,7 +54,14 @@ data(){
          
         }
     },
-
+	
+	methods: {
+		closeNav() {
+			document.getElementById("sidebar").style.display = "none"; 
+			document.getElementById("SideBar2").style.display = "initial";
+			document.getElementById("container").style.marginLeft = "0";
+		} 
+	},
 };
 </script>
 
@@ -101,5 +110,21 @@ h3{
     color: #2c3e50;
     margin-bottom: 1rem;
 }
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  
+}
+
+@media (max-width: 1000px) { 
+	.sidebar{
+		display: none;
+	}
+
+ }
 
 </style>

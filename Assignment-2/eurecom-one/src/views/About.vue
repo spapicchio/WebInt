@@ -93,6 +93,39 @@ export default {
 @media all and (min-width: 800px) {
 }
 
+@media (max-width: 1000px) { 
+	
+	.wrapper{
+		background: rgba(134, 134, 134, 0.151);
+		grid-template-columns: 100%;
+		grid-template-rows: 150px 50px 20% 20% 20% 20%;
+	}
+	
+	.header {
+		grid-column: 1;
+	}
+	
+	.nav {
+		grid-column: 1;
+	}
+	.mainAbout {
+		grid-column: 1;
+	}
+
+	.aside-1 {
+		grid-column: 1;
+	}
+
+	.aside-2 {
+		grid-column: 1;
+		grid-row: 7;
+	}
+	.footer {
+		grid-column: 1;
+		grid-row: 8;
+	}
+}
+
 
 
 

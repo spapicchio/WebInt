@@ -3,10 +3,18 @@
     <a id="homeBtn" @click="iconClick('home')" class="active">Home</a>
     <a id="mailBtn" @click="iconClick('email')">Email</a>
     <a id="aboutBtn" @click="iconClick('about')">About</a>
+	<a id="mapBtn" @click="iconClick('calendar')">Calendar</a>
 
     <div class="nav-right">
       <div class="user">
         <h1 class="title is-5">Hello {{ form.completName }}</h1>
+		<img
+          id="user-image"
+          v-if="form.seen"
+          :src="form.picture"
+          :alt="`${form.firstName} ${form.lastName}`"
+		  @click="detailsProfile()"
+        />
         <button class="button is-danger" @click="logoutClick"> Log-Out</button>
       </div>
     </div>
@@ -35,6 +43,10 @@ export default {
       sessionStorage.clear();
       this.$router.push("/");
     },
+	detailsProfile() {
+		document.getElementById("sidebar").style.display = "initial";
+		document.getElementById("SideBar2").style.display = "none";		
+	},
   },
 };
 </script>
@@ -104,9 +116,44 @@ h1 {
 
 /*Hide image and name*/
 @media screen and (max-width: 800px) {
+  .nav-right #user{
+    width: 25%;
+	height: 25%;
+  }
 
   .user h1 {
     font-size: 0px;
   }
+  
+  .nav a {
+	padding: 14px 4px;
+	font-size: 11px;
+  }
+  
+  .user button{
+    margin-right: 0px;
+    margin-top: 4px;
+	left: -40px;
+    width:50px;
+	font-size:13px;
+	top: +5px;
+  }
+	
+  .nav-right #user-image {
+	border-radius: 50%;
+	border: 0px #333 solid;
+	margin-top: 0px;
+	scale: 0.35;
+	top: -40px;
+	left: -40px;
+	position: relative;
+  }
+	
+  .nav-right {
+    float: none;
+  }
+
+  
+
 }
 </style>

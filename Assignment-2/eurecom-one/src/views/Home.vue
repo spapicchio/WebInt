@@ -15,8 +15,8 @@
       <MyGrades />
     </article>
 
-    <SideBar />
-    <SideBar2 />
+    <SideBar class="SideBar" />
+    <SideBar2 id="SideBar2" class="SideBar2" />
     <Footer />
   </div>
 </template>
@@ -129,4 +129,71 @@ export default {
 body {
   padding: 2em;
 }
+
+@media (max-width: 1000px) { 
+	
+	
+	.SideBar2{
+		grid-column: 1;
+		grid-row: 6;
+		padding-top: 1em;
+
+	}
+	
+	.wrapper{
+		background: rgba(134, 134, 134, 0.151);
+		grid-template-columns: 100%;
+		grid-template-rows: 150px 50px 20% 20% 20% 20%;
+	}
+	
+	.header {
+		grid-column: 1;
+	}
+	
+	.nav {
+		grid-column: 1;
+	}
+	
+	.main {
+		text-align: center;
+		background: rgba(218, 218, 218, 0.151);
+		grid-column: 1;
+		grid-row: 3/7;
+	}
+	
+	.card-classes {
+		text-align: center;
+		grid-column: 1;
+		grid-row: 3;
+	}
+	
+	.card-notifications {
+		text-align: center;
+		grid-column: 1;
+		grid-row: 4;
+	}
+
+	.card-grades {
+		text-align: center;
+		grid-column: 1;
+		grid-row: 5;
+	}
+
+	.aside-1 {
+		background: rgba(134, 134, 134, 0.151);
+		grid-column: 1;
+		grid-row: 3/7;
+	}
+
+	.aside-2 {
+		background: rgba(134, 134, 134, 0.151);
+		grid-column: 1;
+		grid-row: 6/7;
+	}
+	.footer {
+		grid-row: 7;
+		grid-column: 1;
+	}
+	
+ }
 </style>

@@ -488,5 +488,58 @@ table th{
 @media all and (min-width: 600px) {
   .aside { flex: 1 0 0; }
 }
+
+@media (max-width: 1000px) { 
+	.card-email{
+		font-size: 8px;
+		grid-row: 4;
+		grid-column: 1/6;
+		margin-top: 20px;
+	}
+	
+	.aside-1 {
+		grid-column: 1/6;
+		display: grid;
+		grid-template-columns: 25% 25% 25% 25%;
+		grid-template-rows: 50px;
+		
+	}
+	
+	.wrapper {
+		display: grid;
+		grid-template-columns: 20% 20% 20% 20% 20%;
+		grid-template-rows: 150px 50px 50px 800px 20% 20%;
+	}
+	
+	table{
+		overflow-y:scroll;
+		max-width: 100%;
+		height:500px;
+		display:block;
+		margin-left: 0%;
+		text-align: left;
+  
+		border-collapse: separate;
+		border-spacing: 0px 7px;
+	}
+
+	table td,
+	table th{
+		padding:0 0px 0 10px;
+		word-wrap: break-word;
+		vertical-align: middle;
+	}
+	
+	table button{
+		margin-bottom: 4px;
+		width: 50px;
+		padding-left:10px;
+		text-align: center;
+		width:40px;
+		font-size:11px;
+		left: -10px;
+	}
+	
+}
 </style>
 

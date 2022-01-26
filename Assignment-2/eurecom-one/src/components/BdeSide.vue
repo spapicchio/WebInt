@@ -1,5 +1,6 @@
 <template>
 <div class=container>
+	<div id="sidebarBde" class="sidebarBde">
         <img
         src="../assets/bde.png"
         alt="BDE"
@@ -103,7 +104,7 @@
         </div>
 
 
-
+	</div>
 </div>
 
 </template>
@@ -222,5 +223,12 @@ h3{
     color: #2c3e50;
     margin-bottom: 1rem;
 }
+
+@media (max-width: 1000px) { 
+	.sidebarBde{
+		display: none;
+	}
+
+ }
 
 </style>
