@@ -71,7 +71,7 @@ export default {
 .wrapper {
   display: grid;
   grid-template-columns: 20% 20% 20% 20% 20%;
-  grid-template-rows: 150px 50px 20% 20% 20% 20%;
+	grid-template-rows: 150px 50px auto auto auto auto;
 }
 .header {
   grid-column: 1/6;
@@ -143,7 +143,7 @@ body {
 	.wrapper{
 		background: rgba(134, 134, 134, 0.151);
 		grid-template-columns: 100%;
-		grid-template-rows: 150px 50px 20% 20% 20% 20%;
+		grid-template-rows: 150px 50px auto auto auto auto;
 	}
 	
 	.header {
@@ -196,4 +196,5 @@ body {
 	}
 	
  }
+ 
 </style>

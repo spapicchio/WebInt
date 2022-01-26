@@ -86,6 +86,7 @@ export default {
 }
 
 .nav-right #user-image {
+  display:none;
   border-radius: 50%;
   border: 5px #333 solid;
   margin-top: 0px;
@@ -140,6 +141,7 @@ h1 {
   }
 	
   .nav-right #user-image {
+	display:revert;
 	border-radius: 50%;
 	border: 0px #333 solid;
 	margin-top: 0px;
@@ -152,8 +154,18 @@ h1 {
   .nav-right {
     float: none;
   }
+}
 
-  
+/* Fix for chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+	.nav-right #user-image {
+		display: none;
+	}
+	
 
 }
+  
+
+
 </style>

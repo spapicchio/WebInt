@@ -133,7 +133,7 @@ export default {
 	.wrap {
 		display: grid;
 		grid-template-columns: 100%;
-		grid-template-rows: 30% 20%;
+		grid-template-rows: auto auto;
 	}
 	
 	.left {
@@ -144,6 +144,10 @@ export default {
 	.content {
 		grid-column: 1;
 		grid-row: 1;
+	}
+	
+	.aside-2 {
+		display: none;
 	}
 }
 </style>

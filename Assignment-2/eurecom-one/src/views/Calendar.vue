@@ -55,9 +55,15 @@ export default {
   text-align: center; 
 }
 
+.header {
+  height: 150px;
+}
+.nav {
+  height: 50px;
+}
 
 .wrapper > * {
-  padding: 10px;
+  
   flex: 1 100%;
 }
 .mainCalendar {
