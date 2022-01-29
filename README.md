@@ -7,4 +7,4 @@ The first assignment was to create a an interactive webpage with HTML5, CSS3 and
 
 ## Assignment 2
 
-The firs assignment was to build a web application fully responsive that could be used by the university (Eurecom, Sophia Antipolis, France) 
+The second assignment was to build a web application fully responsive in VUE hat could be used by the university (Eurecom, Sophia Antipolis, France).
